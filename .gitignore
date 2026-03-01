@@ -18,5 +18,6 @@ npm-debug.log*
 .env
 .env.local
 
-# BMAD output (should not be in the repo)
+# BMAD local install (used for workflow development only)
+_bmad/
 _bmad-output/

@@ -1,147 +1,212 @@
 # Dev Checkpoint
 
-> Reconcile your BMAD planning artifacts with the reality of your codebase.
+> Réconciliez vos artefacts de planification BMAD avec la réalité de votre codebase.
 
-## The Problem
+## Le Problème
 
-During development, your BMAD artifacts (PRD, architecture, stories...) inevitably drift from your actual code. Features get added that aren't documented. Architecture decisions change without updating the docs. Stories are implemented differently than planned.
+En cours de développement, vos artefacts BMAD (PRD, architecture, stories...) s'écartent inévitablement de votre code réel. Des fonctionnalités sont ajoutées sans être documentées. Les décisions d'architecture changent sans mise à jour des docs. Les stories sont implémentées différemment de ce qui était prévu.
 
-This drift degrades your AI-assisted development because the AI works with outdated context that no longer reflects the real project.
+Cette dérive dégrade votre développement assisté par IA car l'IA travaille avec un contexte obsolète qui ne reflète plus le projet réel.
 
-## What This Workflow Does
+## Ce Que Fait Ce Workflow
 
-**Dev Checkpoint** performs a full reconciliation in 7 steps:
+**Dev Checkpoint** effectue une réconciliation complète en 7 étapes :
 
-```
-Step 1  ─ Initialize     Detect artifacts, gather context, create checkpoint folder
-Step 1b ─ Continue        Resume a previous session (if interrupted)
-Step 2  ─ Code Analysis   Deep autonomous scan of your entire codebase
-Step 3  ─ Artifact Review Read and evaluate every BMAD planning artifact
-Step 4  ─ Diagnostic      Compare code vs. artifacts — identify all misalignments
-Step 5  ─ Decisions       Collaboratively decide: update docs OR fix code
-Step 6  ─ Application     Apply doc updates to artifacts + compile code action items
-Step 7  ─ Snapshot        Generate a human-friendly project health summary
-```
+| Étape | Mode | Description |
+|-------|------|-------------|
+| **1. Init** | Semi-collaboratif | Détecter les artefacts, recueillir le contexte, créer le dossier checkpoint |
+| **1b. Continue** | Auto | Reprendre une session précédente (si interrompue) |
+| **2. Code** | Autonome | Analyse approfondie de l'intégralité du codebase |
+| **3. Artefacts** | Autonome | Lecture et évaluation de chaque artefact BMAD |
+| **4. Diagnostic** | Autonome | Comparaison code vs. artefacts — identification des désalignements |
+| **5. Décisions** | Collaboratif | Décider ensemble : mettre à jour les docs OU corriger le code |
+| **6. Application** | Autonome | Appliquer les mises à jour aux artefacts + compiler les actions code |
+| **7. Snapshot** | Autonome | Générer un résumé de santé du projet |
 
-### What You Get
+### Ce Que Vous Obtenez
 
-A timestamped checkpoint folder with:
+Un dossier checkpoint horodaté contenant :
 
-| File | Description |
-|------|-------------|
-| `checkpoint-summary.md` | Human-friendly project overview with health score |
-| `codebase-analysis.md` | Full code review (structure, quality, tech debt) |
-| `artifacts-review.md` | Review of every BMAD artifact |
-| `misalignment-report.md` | Every divergence between plan and reality |
-| `decisions-log.md` | Your decisions on how to handle each divergence |
-| `action-items.md` | Prioritized list of code corrections to plan |
+| Fichier | Description |
+|---------|-------------|
+| `checkpoint-summary.md` | Vue d'ensemble du projet avec score de santé |
+| `codebase-analysis.md` | Revue complète du code (structure, qualité, dette technique) |
+| `artifacts-review.md` | Revue de chaque artefact BMAD |
+| `misalignment-report.md` | Chaque divergence entre le plan et la réalité |
+| `decisions-log.md` | Vos décisions sur la gestion de chaque divergence |
+| `action-items.md` | Liste priorisée des corrections code à planifier |
 
-Plus: **your BMAD artifacts are updated in-place** to reflect reality.
+En plus : **vos artefacts BMAD sont mis à jour sur place** pour refléter la réalité.
 
 ## Installation
 
-### 1. Copy to Your Project
+### Infos module
+
+- **Module cible :** BMM (Software Development)
+- **Phase :** 4-implementation
+- **Type de session :** Continuable (reprise possible)
+- **Config requise :** `_bmad/bmm/config.yaml` (`project_name`, `output_folder`, `user_name`, `communication_language`, `document_output_language`, `planning_artifacts`)
+
+### 1. Copier le workflow
 
 ```bash
-cp -r dev-checkpoint/ your-project/_bmad/bmm/workflows/4-implementation/dev-checkpoint/
+cp -r workflows/dev-checkpoint/ votre-projet/_bmad/bmm/workflows/4-implementation/dev-checkpoint/
 ```
 
-### 2. Verify Config
+### 2. Ajouter au manifeste
 
-Your `_bmad/bmm/config.yaml` should include these variables:
+Ajoutez cette ligne à la fin de `_bmad/_config/workflow-manifest.csv` dans votre projet :
+
+```csv
+"dev-checkpoint","Workflow de réconciliation et réalignement du contexte projet BMAD avec la réalité du code source. Utiliser quand l'utilisateur dit ""dev checkpoint"" ou ""faire un point de dev"" ou ""réconcilier les artefacts""","bmm","_bmad/bmm/workflows/4-implementation/dev-checkpoint/workflow.md"
+```
+
+### 3. Créer la commande IDE
+
+Créez le fichier de commande correspondant à votre IDE :
+
+#### Cursor
+
+Créez `.cursor/commands/bmad-bmm-dev-checkpoint.md` :
+
+```markdown
+---
+name: 'dev-checkpoint'
+description: 'Réconciliation et réalignement du contexte projet BMAD avec la réalité du code source.'
+---
+
+IT IS CRITICAL THAT YOU FOLLOW THIS COMMAND: LOAD the FULL {project-root}/_bmad/bmm/workflows/4-implementation/dev-checkpoint/workflow.md, READ its entire contents and follow its directions exactly!
+```
+
+#### Claude Code
+
+Créez `.claude/commands/bmad-bmm-dev-checkpoint.md` :
+
+```markdown
+---
+name: 'dev-checkpoint'
+description: 'Réconciliation et réalignement du contexte projet BMAD avec la réalité du code source.'
+---
+
+IT IS CRITICAL THAT YOU FOLLOW THIS COMMAND: LOAD the FULL {project-root}/_bmad/bmm/workflows/4-implementation/dev-checkpoint/workflow.md, READ its entire contents and follow its directions exactly!
+```
+
+#### Gemini
+
+Créez `.gemini/commands/bmad-bmm-dev-checkpoint.toml` :
+
+```toml
+description = "Réconciliation et réalignement du contexte projet BMAD avec la réalité du code source."
+prompt = """
+Execute the BMAD 'dev-checkpoint' workflow.
+
+CRITICAL: You must load and follow the workflow definition exactly.
+
+WORKFLOW INSTRUCTIONS:
+1. LOAD the workflow file from {project-root}/_bmad/bmm/workflows/4-implementation/dev-checkpoint/workflow.md
+2. READ its entire contents
+3. FOLLOW every step precisely as specified
+4. DO NOT skip or modify any steps
+
+WORKFLOW FILE: {project-root}/_bmad/bmm/workflows/4-implementation/dev-checkpoint/workflow.md
+"""
+```
+
+#### GitHub Copilot
+
+Créez `.github/prompts/bmad-bmm-dev-checkpoint.prompt.md` :
+
+```markdown
+---
+description: 'Dev checkpoint — réconciliation artefacts BMAD'
+agent: 'agent'
+tools: ['read', 'edit', 'search', 'execute']
+---
+
+1. Load {project-root}/_bmad/bmm/config.yaml and store ALL fields as session variables
+2. Load and follow the workflow at {project-root}/_bmad/bmm/workflows/4-implementation/dev-checkpoint/workflow.md
+```
+
+### 4. Vérifier la config
+
+Votre `_bmad/bmm/config.yaml` doit inclure ces variables :
 
 ```yaml
-project_name: "Your Project"
+project_name: "Votre Projet"
 output_folder: "_bmad-output"
-user_name: "Your Name"
-communication_language: "fr"    # or "en"
-document_output_language: "fr"  # or "en"
+user_name: "Votre Nom"
+communication_language: "french"
+document_output_language: "french"
 ```
 
-### 3. Launch
+### 5. Lancer
+
+Ouvrez un **nouveau chat** et tapez :
 
 ```
 /bmad-bmm-dev-checkpoint
 ```
 
-Or in natural language:
+Ou en langage naturel :
+
 ```
-"Run dev checkpoint"
-"Faire un point de dev"
+"Fais un point de dev"
+"Lance le dev checkpoint"
+"Réconcilie les artefacts avec le code"
 ```
 
-## How It Works
+## Fonctionnement détaillé
 
-### Phase 1: Initialization (Step 1)
+### Phase 1 : Initialisation (Étape 1)
 
-The workflow:
-- Scans your project for existing BMAD artifacts (PRD, architecture, stories, etc.)
-- Asks you 2-3 targeted questions about recent changes
-- Creates a timestamped checkpoint folder
+Le workflow :
+- Scanne votre projet pour les artefacts BMAD existants (PRD, architecture, stories, etc.)
+- Vous pose 2-3 questions ciblées sur les changements récents
+- Crée un dossier checkpoint horodaté
 
-### Phase 2: Analysis (Steps 2-3) — Autonomous
+### Phase 2 : Analyse (Étapes 2-3) — Autonome
 
-The AI performs deep analysis without needing your input:
-- **Step 2**: Scans your entire codebase — structure, code quality, dependencies, git history, tech debt
-- **Step 3**: Reads and evaluates every BMAD artifact — completeness, clarity, internal coherence
+L'IA effectue une analyse approfondie sans intervention de votre part :
+- **Étape 2** : Scanne l'intégralité de votre codebase — structure, qualité du code, dépendances, historique git, dette technique
+- **Étape 3** : Lit et évalue chaque artefact BMAD — complétude, clarté, cohérence interne
 
-### Phase 3: Diagnostic (Step 4) — Autonomous
+### Phase 3 : Diagnostic (Étape 4) — Autonome
 
-The AI cross-references code and artifacts to identify every misalignment, categorized by:
-- **Architecture** — Structural divergences
-- **Functional** — Feature coverage gaps
-- **UX/UI** — Design divergences
-- **Tech/Stack** — Technical choice differences
-- **Documentation** — Incomplete or outdated artifacts
+L'IA croise code et artefacts pour identifier chaque désalignement, catégorisé par :
+- **Architecture** — Divergences structurelles
+- **Fonctionnel** — Lacunes de couverture des fonctionnalités
+- **UX/UI** — Divergences de design
+- **Tech/Stack** — Différences de choix techniques
+- **Documentation** — Artefacts incomplets ou obsolètes
 
-Each misalignment is rated:
-- **Red** — Critical, needs immediate attention
-- **Yellow** — Important, should be addressed
-- **Green** — Minor, low impact
+Chaque désalignement est noté : rouge (critique), jaune (important), vert (mineur).
 
-### Phase 4: Decisions (Step 5) — Collaborative
+### Phase 4 : Décisions (Étape 5) — Collaboratif
 
-For each misalignment, you choose:
-- **[D] Update Documentation** — The code is right, update the artifact
-- **[C] Code Action** — The doc is right, note a fix for the code
+Pour chaque désalignement, vous choisissez :
+- **[D] Mettre à jour la documentation** — Le code est correct, mettre à jour l'artefact
+- **[C] Action code** — Le doc est correct, noter une correction pour le code
 
-Critical items are reviewed one by one. Minor items can be batch-processed.
+### Phase 5 : Application (Étape 6) — Autonome
 
-### Phase 5: Application (Step 6) — Autonomous
+L'IA met à jour vos artefacts BMAD sur place, vérifie la cohérence inter-artefacts, et compile les actions code en liste priorisée.
 
-The AI:
-- Updates your BMAD artifacts in-place based on your [D] decisions
-- Verifies cross-artifact coherence after changes
-- Compiles all [C] decisions into a prioritized action items list
+### Phase 6 : Snapshot (Étape 7) — Autonome
 
-### Phase 6: Snapshot (Step 7) — Autonomous
+Un résumé lisible est généré avec score de santé, vue d'ensemble, réalignements effectués, actions restantes et priorités recommandées.
 
-A human-friendly summary is generated with:
-- Project health score (green/yellow/red)
-- Plain-language project state overview
-- What was realigned
-- What remains to be done
-- Recommended next priorities
+## Reprise
 
-## Resumability
+Le workflow suit la progression via `stepsCompleted` dans le frontmatter du checkpoint. Si votre session s'interrompt :
 
-The workflow tracks progress via `stepsCompleted` in the checkpoint frontmatter. If your session ends mid-workflow:
+1. Relancez le workflow
+2. Il détecte le checkpoint en cours
+3. Reprend automatiquement à l'étape suivante
 
-1. Re-launch the workflow
-2. It detects the in-progress checkpoint
-3. Automatically resumes at the next step
+## Quand l'utiliser
 
-## When to Use
-
-- After a significant development phase
-- When you feel your planning docs are outdated
-- Before starting a new sprint or feature set
-- When onboarding someone to understand project state
-- Periodically (e.g., every 2-4 weeks of active development)
-
-## Module Info
-
-- **Module**: BMM (Software Development)
-- **Phase**: 4-implementation
-- **Session Type**: Continuable
-- **Language**: Bilingual (FR/EN, follows your config)
+- Après une phase de développement significative
+- Quand vous sentez que vos docs de planification sont obsolètes
+- Avant de démarrer un nouveau sprint ou un nouvel ensemble de fonctionnalités
+- Lors de l'onboarding pour comprendre l'état du projet
+- Périodiquement (toutes les 2-4 semaines de développement actif)

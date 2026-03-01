@@ -1,77 +1,77 @@
 ---
 name: 'step-07-snapshot'
-description: 'Finalize checkpoint summary with human-friendly overview and mark workflow complete'
+description: 'Finaliser le résumé du checkpoint avec une vue d\'ensemble lisible et marquer le workflow comme terminé'
 
 checkpointFolder: '{checkpointFolder}'
 ---
 
-# Step 7: Snapshot Final
+# Étape 7 : Snapshot Final
 
-## STEP GOAL:
+## OBJECTIF DE L'ÉTAPE :
 
-To finalize the checkpoint by completing the `checkpoint-summary.md` with a comprehensive, human-friendly summary that gives anyone a clear picture of the project state, the realignment actions taken, and what's next. Mark the workflow as complete.
+Finaliser le checkpoint en complétant le `checkpoint-summary.md` avec un résumé complet et lisible qui donne à quiconque une vision claire de l'état du projet, des actions de réalignement effectuées et de la suite. Marquer le workflow comme terminé.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## RÈGLES D'EXÉCUTION OBLIGATOIRES (LIRE EN PREMIER) :
 
-### Universal Rules:
+### Règles Universelles :
 
-- 🛑 NEVER generate content without user input
-- 📖 CRITICAL: Read the complete step file before taking any action
-- 🔄 CRITICAL: When loading next step with 'C', ensure entire file is read
-- 📋 YOU ARE A FACILITATOR, not a content generator
-- ✅ YOU MUST ALWAYS SPEAK OUTPUT in {communication_language}
+- 🛑 NE JAMAIS générer de contenu sans entrée utilisateur
+- 📖 CRITIQUE : Lire le fichier d'étape complet avant toute action
+- 🔄 CRITIQUE : Lors du chargement de l'étape suivante avec 'C', s'assurer que le fichier entier est lu
+- 📋 VOUS ÊTES UN FACILITATEUR, pas un générateur de contenu
+- ✅ VOUS DEVEZ TOUJOURS PARLER EN SORTIE dans {communication_language}
 
-### Role Reinforcement:
+### Rappel du Rôle :
 
-- ✅ You are a technical communicator producing a clear, actionable summary
+- ✅ Vous êtes un communicateur technique produisant un résumé clair et actionnable
 - ✅ Clair, accessible, synthétique. Écrit pour être compris par quelqu'un qui n'a pas suivi le processus.
-- ✅ You bring expertise in synthesizing complex technical information into digestible summaries
+- ✅ Vous apportez une expertise en synthèse d'informations techniques complexes en résumés digestibles
 
-### Step-Specific Rules:
+### Règles Spécifiques à l'Étape :
 
-- 🎯 Synthèse finale — clair, lisible, human-friendly
-- 🚫 FORBIDDEN to use jargon without explanation
-- 💬 Write as if the reader is discovering the project state for the first time
-- 📋 Include a qualitative health assessment of the project
+- 🎯 Synthèse finale — claire, lisible, human-friendly
+- 🚫 INTERDIT d'utiliser du jargon sans explication
+- 💬 Écrire comme si le lecteur découvre l'état du projet pour la première fois
+- 📋 Inclure une évaluation qualitative de la santé du projet
 
-## EXECUTION PROTOCOLS:
+## PROTOCOLES D'EXÉCUTION :
 
-- 🎯 Follow the MANDATORY SEQUENCE exactly
-- 💾 Finalize checkpoint-summary.md with all sections
-- 📖 Mark workflow as COMPLETE in frontmatter
-- 🚫 This is the FINAL step — no nextStepFile
+- 🎯 Suivre la SÉQUENCE OBLIGATOIRE exactement
+- 💾 Finaliser checkpoint-summary.md avec toutes les sections
+- 📖 Marquer le workflow comme TERMINÉ dans le frontmatter
+- 🚫 C'est l'étape FINALE — pas de nextStepFile
 
-## CONTEXT BOUNDARIES:
+## LIMITES DU CONTEXTE :
 
-- Available: All checkpoint files (codebase-analysis, artifacts-review, misalignment-report, decisions-log, action-items)
-- Focus: Synthesis and finalization
-- Limits: Summarize and synthesize, don't create new analysis
-- Dependencies: All previous steps completed
+- Disponible : Tous les fichiers du checkpoint (codebase-analysis, artifacts-review, misalignment-report, decisions-log, action-items)
+- Focus : Synthèse et finalisation
+- Limites : Résumer et synthétiser, ne pas créer de nouvelle analyse
+- Dépendances : Toutes les étapes précédentes terminées
 
-## MANDATORY SEQUENCE
+## SÉQUENCE OBLIGATOIRE
 
-**CRITICAL:** Follow this sequence exactly. Do not skip, reorder, or improvise unless user explicitly requests a change.
+**CRITIQUE :** Suivre cette séquence exactement. Ne pas sauter, réordonner ou improviser sauf demande explicite de l'utilisateur.
 
-### 1. Load All Checkpoint Files
+### 1. Charger Tous les Fichiers du Checkpoint
 
-Read all files in {checkpointFolder}:
+Lire tous les fichiers dans {checkpointFolder} :
 - `codebase-analysis.md`
 - `artifacts-review.md`
 - `misalignment-report.md`
 - `decisions-log.md`
 - `action-items.md`
 
-### 2. Generate Project Health Assessment
+### 2. Générer l'Évaluation de Santé du Projet
 
-Based on all analysis, determine an overall project health score:
+Sur la base de toute l'analyse, déterminer un score de santé global du projet :
 
 - **🟢 Aligné** — Le projet est bien aligné avec la documentation. Divergences mineures seulement.
 - **🟡 Partiellement aligné** — Des divergences significatives existent mais le projet reste sur la bonne trajectoire.
 - **🔴 Besoin d'attention** — Des divergences critiques nécessitent une action immédiate.
 
-### 3. Finalize Checkpoint Summary
+### 3. Finaliser le Résumé du Checkpoint
 
-Update `{checkpointFolder}/checkpoint-summary.md` — replace the placeholder sections with complete content:
+Mettre à jour `{checkpointFolder}/checkpoint-summary.md` — remplacer les sections placeholder par le contenu complet :
 
 ```markdown
 # Dev Checkpoint — {project_name}
@@ -136,29 +136,29 @@ Update `{checkpointFolder}/checkpoint-summary.md` — replace the placeholder se
 
 ## Contexte du développeur
 
-[Responses from step 01 — preserved from initialization]
+[Réponses de l'étape 01 — préservées depuis l'initialisation]
 
 ## Artefacts BMAD découverts
 
-[List from step 01 — preserved from initialization]
+[Liste de l'étape 01 — préservée depuis l'initialisation]
 ```
 
-### 4. Update Frontmatter to Complete
+### 4. Mettre à Jour le Frontmatter pour Terminer
 
-Update the frontmatter of `checkpoint-summary.md`:
-- Append `step-07-snapshot` to `stepsCompleted`
-- Set `lastStep: 'step-07-snapshot'`
-- Set `status: COMPLETE`
+Mettre à jour le frontmatter de `checkpoint-summary.md` :
+- Ajouter `step-07-snapshot` à `stepsCompleted`
+- Définir `lastStep: 'step-07-snapshot'`
+- Définir `status: COMPLETE`
 
-### 5. Present Final Summary to Developer
+### 5. Présenter le Résumé Final au Développeur
 
-Present the human-friendly summary directly to the developer:
+Présenter le résumé lisible directement au développeur :
 
 "**✅ Dev Checkpoint terminé !**
 
 **🏥 Santé du projet : [score]**
 
-[Present the key sections of the human-friendly summary]
+[Présenter les sections clés du résumé lisible]
 
 **Dossier du checkpoint :** `{checkpointFolder}/`
 
@@ -168,24 +168,24 @@ Le BMad Master recommande de relancer un checkpoint après la prochaine phase de
 
 ---
 
-## 🚨 SYSTEM SUCCESS/FAILURE METRICS
+## 🚨 MÉTRIQUES DE SUCCÈS/ÉCHEC DU SYSTÈME
 
-### ✅ SUCCESS:
+### SUCCÈS :
 
-- All checkpoint files read and synthesized
-- Project health assessment determined and justified
-- Human-friendly summary written in clear, accessible language
-- Metrics table populated with accurate numbers
-- checkpoint-summary.md finalized with all sections
-- Status marked as COMPLETE
-- Developer presented with clear final summary
+- Tous les fichiers du checkpoint lus et synthétisés
+- Évaluation de santé du projet déterminée et justifiée
+- Résumé lisible rédigé en langage clair et accessible
+- Tableau des métriques rempli avec des chiffres exacts
+- checkpoint-summary.md finalisé avec toutes les sections
+- Statut marqué comme TERMINÉ
+- Développeur présenté avec un résumé final clair
 
-### ❌ SYSTEM FAILURE:
+### ÉCHEC SYSTÈME :
 
-- Summary uses jargon without explanation
-- Missing sections in checkpoint-summary.md
-- Not reading all checkpoint files before synthesizing
-- Status not marked as COMPLETE
-- Summary not useful to someone reading it for the first time
+- Résumé utilisant du jargon sans explication
+- Sections manquantes dans checkpoint-summary.md
+- Ne pas lire tous les fichiers du checkpoint avant de synthétiser
+- Statut non marqué comme TERMINÉ
+- Résumé inutile pour quelqu'un le lisant pour la première fois
 
-**Master Rule:** The final summary must be clear enough that anyone reading it understands the exact state of the project. No jargon, no assumptions.
+**Règle Maîtresse :** Le résumé final doit être assez clair pour que quiconque le lisant comprenne l'état exact du projet. Pas de jargon, pas de présomptions.

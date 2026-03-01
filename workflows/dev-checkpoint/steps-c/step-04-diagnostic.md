@@ -1,74 +1,74 @@
 ---
 name: 'step-04-diagnostic'
-description: 'Compare codebase analysis with artifacts review to identify all misalignments'
+description: 'Comparer l\'analyse du codebase avec la revue des artefacts pour identifier tous les désalignements'
 
 nextStepFile: './step-05-decisions.md'
 checkpointFolder: '{checkpointFolder}'
 ---
 
-# Step 4: Diagnostic des Désalignements
+# Étape 4 : Diagnostic des Désalignements
 
-## STEP GOAL:
+## OBJECTIF DE L'ÉTAPE :
 
-To compare the codebase analysis (step 02) with the artifacts review (step 03), identify every misalignment between planned and actual state, categorize them, and produce a comprehensive `misalignment-report.md` grouped by category.
+Comparer l'analyse du codebase (étape 02) avec la revue des artefacts (étape 03), identifier chaque désalignement entre l'état prévu et l'état réel, les catégoriser, et produire un `misalignment-report.md` complet regroupé par catégorie.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## RÈGLES D'EXÉCUTION OBLIGATOIRES (LIRE EN PREMIER) :
 
-### Universal Rules:
+### Règles Universelles :
 
-- 🛑 NEVER generate content without user input
-- 📖 CRITICAL: Read the complete step file before taking any action
-- 🔄 CRITICAL: When loading next step with 'C', ensure entire file is read
-- 📋 YOU ARE A FACILITATOR, not a content generator
-- ✅ YOU MUST ALWAYS SPEAK OUTPUT in {communication_language}
-- ⚙️ TOOL/SUBPROCESS FALLBACK: If any instruction references a subprocess, subagent, or tool you do not have access to, you MUST still achieve the outcome in your main context thread
+- 🛑 NE JAMAIS générer de contenu sans entrée utilisateur
+- 📖 CRITIQUE : Lire le fichier d'étape complet avant toute action
+- 🔄 CRITIQUE : Lors du chargement de l'étape suivante avec 'C', s'assurer que le fichier entier est lu
+- 📋 VOUS ÊTES UN FACILITATEUR, pas un générateur de contenu
+- ✅ VOUS DEVEZ TOUJOURS PARLER EN SORTIE dans {communication_language}
+- ⚙️ REPLI OUTIL/SOUS-PROCESSUS : Si une instruction fait référence à un sous-processus, sous-agent ou outil auquel vous n'avez pas accès, vous DEVEZ malgré tout atteindre le résultat dans votre fil de contexte principal
 
-### Role Reinforcement:
+### Rappel du Rôle :
 
-- ✅ You are a reconciliation analyst comparing plan vs reality
+- ✅ Vous êtes un analyste de réconciliation comparant le plan à la réalité
 - ✅ Objectif, factuel, exhaustif. Chaque désalignement est documenté sans jugement.
-- ✅ You bring expertise in gap analysis and systematic comparison
+- ✅ Vous apportez une expertise en analyse des écarts et comparaison systématique
 
-### Step-Specific Rules:
+### Règles Spécifiques à l'Étape :
 
-- 🎯 Subprocess Pattern 4: Launch parallel comparisons by category when possible
-- ⚙️ If subprocess unavailable, compare sequentially by category
-- 🚫 FORBIDDEN to make decisions about how to resolve misalignments — that's step 05
-- 💬 Report findings objectively — no recommendations yet
-- 🚫 DO NOT BE LAZY — compare every aspect systematically
+- 🎯 Motif Sous-processus 4 : Lancer des comparaisons parallèles par catégorie lorsque possible
+- ⚙️ Si sous-processus indisponible, comparer séquentiellement par catégorie
+- 🚫 INTERDIT de prendre des décisions sur la résolution des désalignements — c'est l'étape 05
+- 💬 Rapporter les constats objectivement — pas encore de recommandations
+- 🚫 NE PAS ÊTRE PARESSEUX — comparer chaque aspect systématiquement
 
-## EXECUTION PROTOCOLS:
+## PROTOCOLES D'EXÉCUTION :
 
-- 🎯 Follow the MANDATORY SEQUENCE exactly
-- 💾 Write complete diagnostic to {checkpointFolder}/misalignment-report.md
-- 📖 Update stepsCompleted in checkpoint-summary.md
-- 🚫 Do NOT skip any comparison category
+- 🎯 Suivre la SÉQUENCE OBLIGATOIRE exactement
+- 💾 Écrire le diagnostic complet dans {checkpointFolder}/misalignment-report.md
+- 📖 Mettre à jour stepsCompleted dans checkpoint-summary.md
+- 🚫 Ne PAS ignorer aucune catégorie de comparaison
 
-## CONTEXT BOUNDARIES:
+## LIMITES DU CONTEXTE :
 
-- Available: codebase-analysis.md (step 02) + artifacts-review.md (step 03)
-- Focus: COMPARISON between code and artifacts — identify gaps
-- Limits: Report misalignments, do NOT prescribe solutions
-- Dependencies: step-02 and step-03 completed
+- Disponible : codebase-analysis.md (étape 02) + artifacts-review.md (étape 03)
+- Focus : COMPARAISON entre le code et les artefacts — identifier les écarts
+- Limites : Rapporter les désalignements, NE PAS prescrire de solutions
+- Dépendances : étapes 02 et 03 terminées
 
-## MANDATORY SEQUENCE
+## SÉQUENCE OBLIGATOIRE
 
-**CRITICAL:** Follow this sequence exactly. Do not skip, reorder, or improvise unless user explicitly requests a change.
+**CRITIQUE :** Suivre cette séquence exactement. Ne pas sauter, réordonner ou improviser sauf demande explicite de l'utilisateur.
 
-### 1. Load Analysis Reports
+### 1. Charger les Rapports d'Analyse
 
-Read both reports from the checkpoint folder:
+Lire les deux rapports du dossier checkpoint :
 - `{checkpointFolder}/codebase-analysis.md`
 - `{checkpointFolder}/artifacts-review.md`
 
-### 2. Announce Diagnostic Start
+### 2. Annoncer le Démarrage du Diagnostic
 
 "**Lancement du diagnostic des désalignements.**
 Le BMad Master compare le code source avec les artefacts BMAD pour identifier toutes les divergences."
 
-### 3. Architecture Comparison
+### 3. Comparaison Architecturale
 
-Compare the actual code architecture with what the architecture document specifies:
+Comparer l'architecture réelle du code avec ce que spécifie le document d'architecture :
 
 - **Structure du projet** : L'organisation des dossiers/fichiers suit-elle l'architecture prévue ?
 - **Patterns architecturaux** : Les patterns utilisés dans le code correspondent-ils à ceux documentés ?
@@ -76,36 +76,36 @@ Compare the actual code architecture with what the architecture document specifi
 - **Couches et responsabilités** : La séparation des responsabilités est-elle respectée ?
 - **Stack technique** : Les technologies utilisées correspondent-elles à celles prévues ?
 
-### 4. Functional Coverage Comparison
+### 4. Comparaison de la Couverture Fonctionnelle
 
-Compare implemented features with PRD/Stories requirements:
+Comparer les fonctionnalités implémentées avec les exigences du PRD/Stories :
 
 - **Fonctionnalités implémentées** vs **fonctionnalités prévues dans le PRD**
 - **Couverture des stories** : Quelles stories sont implémentées, partiellement, ou pas du tout ?
 - **Critères d'acceptation** : Les implémentations respectent-elles les critères définis ?
 - **Fonctionnalités non prévues** : Y a-t-il du code qui implémente des choses non documentées ?
 
-### 5. UX/UI Comparison
+### 5. Comparaison UX/UI
 
-If UX design artifacts exist, compare:
+Si des artefacts de design UX existent, comparer :
 
 - **Composants UI** : Les composants correspondent-ils aux maquettes/wireframes ?
 - **Flux utilisateur** : Les parcours implémentés suivent-ils les flux définis ?
 - **Design system** : Les conventions visuelles sont-elles respectées ?
 - **Responsive/Accessibility** : Conformité avec les exigences UX
 
-### 6. Technical Decisions Comparison
+### 6. Comparaison des Décisions Techniques
 
-Compare technical choices in code vs documentation:
+Comparer les choix techniques dans le code vs la documentation :
 
 - **Dépendances** : Les librairies utilisées correspondent-elles à celles prévues ?
 - **Patterns de données** : Le modèle de données suit-il le schema prévu ?
 - **API design** : Les endpoints/interfaces suivent-ils la spécification ?
 - **Configuration** : La configuration suit-elle les pratiques documentées ?
 
-### 7. Categorize and Prioritize
+### 7. Catégoriser et Prioriser
 
-Group all identified misalignments into categories:
+Regrouper tous les désalignements identifiés par catégories :
 
 **Catégories de désalignement :**
 
@@ -120,9 +120,9 @@ Group all identified misalignments into categories:
 - 🟡 **Important** — Divergence significative à adresser
 - 🟢 **Mineur** — Divergence légère, faible impact
 
-### 8. Write Misalignment Report
+### 8. Rédiger le Rapport des Désalignements
 
-Create `{checkpointFolder}/misalignment-report.md`:
+Créer `{checkpointFolder}/misalignment-report.md` :
 
 ```markdown
 # Diagnostic des Désalignements
@@ -137,88 +137,88 @@ Create `{checkpointFolder}/misalignment-report.md`:
 - 🟢 Mineurs: X
 
 ## 1. Architecture
-[For each misalignment in this category:]
-### [MA-001] [Short title]
+[Pour chaque désalignement dans cette catégorie:]
+### [MA-001] [Titre court]
 - **Sévérité:** 🔴/🟡/🟢
-- **Prévu (doc):** [what the artifact says]
-- **Réel (code):** [what the code actually does]
-- **Impact:** [what this misalignment means]
+- **Prévu (doc):** [ce que dit l'artefact]
+- **Réel (code):** [ce que le code fait réellement]
+- **Impact:** [ce que signifie ce désalignement]
 
 ## 2. Fonctionnel
-[Same pattern]
+[Même schéma]
 
 ## 3. UX/UI
-[Same pattern]
+[Même schéma]
 
 ## 4. Stack/Technique
-[Same pattern]
+[Même schéma]
 
 ## 5. Documentation
-[Same pattern]
+[Même schéma]
 
 ## Alignements confirmés
-[What IS aligned — important for confidence]
+[Ce qui EST aligné — important pour la confiance]
 ```
 
-### 9. Update Checkpoint Summary
+### 9. Mettre à Jour le Résumé du Checkpoint
 
-Update `{checkpointFolder}/checkpoint-summary.md` frontmatter:
-- Append `step-04-diagnostic` to `stepsCompleted`
-- Set `lastStep: 'step-04-diagnostic'`
+Mettre à jour le frontmatter de `{checkpointFolder}/checkpoint-summary.md` :
+- Ajouter `step-04-diagnostic` à `stepsCompleted`
+- Définir `lastStep: 'step-04-diagnostic'`
 
-### 10. Present Diagnostic Summary
+### 10. Présenter le Résumé du Diagnostic
 
-Present the full grouped inventory to the developer:
+Présenter l'inventaire complet groupé au développeur :
 
 "**Diagnostic terminé. Voici l'inventaire complet des désalignements :**
 
 **🔴 Critiques ([count]) :**
-- [List briefly]
+- [Lister brièvement]
 
 **🟡 Importants ([count]) :**
-- [List briefly]
+- [Lister brièvement]
 
 **🟢 Mineurs ([count]) :**
-- [List briefly]
+- [Lister brièvement]
 
 **✅ Alignements confirmés :**
-- [Key areas that are aligned]
+- [Domaines clés qui sont alignés]
 
 Le rapport détaillé est dans `misalignment-report.md`. L'étape suivante vous permettra de prendre des décisions sur chaque désalignement."
 
-### 11. Present MENU OPTIONS
+### 11. Présenter les OPTIONS DU MENU
 
-Display: **[C] Continuer — Passer aux décisions de réalignement**
+Afficher : **[C] Continuer — Passer aux décisions de réalignement**
 
-#### Menu Handling Logic:
+#### Logique de Gestion du Menu :
 
-- IF C: Verify misalignment-report.md is written and checkpoint-summary.md is updated, then load, read entire file, then execute {nextStepFile}
-- IF Any other: help user, then redisplay menu
+- SI C : Vérifier que misalignment-report.md est écrit et checkpoint-summary.md est mis à jour, puis charger, lire le fichier entier, puis exécuter {nextStepFile}
+- SI Autre : aider l'utilisateur, puis réafficher le menu
 
-#### EXECUTION RULES:
+#### RÈGLES D'EXÉCUTION :
 
-- ALWAYS halt and wait for user input after presenting menu
-- ONLY proceed to next step when user selects 'C'
+- TOUJOURS s'arrêter et attendre l'entrée utilisateur après la présentation du menu
+- NE procéder à l'étape suivante QUE lorsque l'utilisateur sélectionne 'C'
 
 ---
 
-## 🚨 SYSTEM SUCCESS/FAILURE METRICS
+## 🚨 MÉTRIQUES DE SUCCÈS/ÉCHEC DU SYSTÈME
 
-### ✅ SUCCESS:
+### SUCCÈS :
 
-- Both analysis reports loaded and cross-referenced
-- Every comparison category covered systematically
-- All misalignments identified, categorized, and severity-rated
-- Aligned areas also documented (for confidence)
-- Complete misalignment-report.md written with grouped inventory
-- Developer presented with clear summary
+- Les deux rapports d'analyse chargés et croisés
+- Chaque catégorie de comparaison couverte systématiquement
+- Tous les désalignements identifiés, catégorisés et évalués par sévérité
+- Les zones alignées également documentées (pour la confiance)
+- misalignment-report.md complet rédigé avec inventaire groupé
+- Développeur présenté avec un résumé clair
 
-### ❌ SYSTEM FAILURE:
+### ÉCHEC SYSTÈME :
 
-- Missing comparison categories
-- Making recommendations or decisions (not yet)
-- Not reading both analysis reports
-- Surface-level comparison missing real misalignments
-- Not categorizing or prioritizing findings
+- Catégories de comparaison manquantes
+- Faire des recommandations ou décisions (pas encore)
+- Ne pas lire les deux rapports d'analyse
+- Comparaison superficielle manquant les vrais désalignements
+- Ne pas catégoriser ou prioriser les constats
 
-**Master Rule:** Every comparison must be thorough. The diagnostic must be complete and objective. Skipping categories is FORBIDDEN.
+**Règle Maîtresse :** Chaque comparaison doit être approfondie. Le diagnostic doit être complet et objectif. Ignorer des catégories est INTERDIT.

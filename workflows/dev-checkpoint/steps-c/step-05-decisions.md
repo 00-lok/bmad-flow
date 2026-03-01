@@ -1,6 +1,6 @@
 ---
 name: 'step-05-decisions'
-description: 'Collaboratively review misalignments and make realignment decisions with the developer'
+description: 'Réviser collaborativement les désalignements et prendre les décisions de réalignement avec le développeur'
 
 nextStepFile: './step-06-application.md'
 checkpointFolder: '{checkpointFolder}'
@@ -8,60 +8,60 @@ advancedElicitationTask: '{project-root}/_bmad/core/workflows/advanced-elicitati
 partyModeWorkflow: '{project-root}/_bmad/core/workflows/party-mode/workflow.md'
 ---
 
-# Step 5: Décisions de Réalignement
+# Étape 5 : Décisions de Réalignement
 
-## STEP GOAL:
+## OBJECTIF DE L'ÉTAPE :
 
-To collaboratively review every misalignment identified in step 04 with the developer, discuss each one, and make clear decisions: update the documentation to match reality OR log a corrective action on the code. Every decision is justified and logged in `decisions-log.md`.
+Réviser collaborativement chaque désalignement identifié à l'étape 04 avec le développeur, discuter de chacun, et prendre des décisions claires : mettre à jour la documentation pour correspondre à la réalité OU enregistrer une action corrective sur le code. Chaque décision est justifiée et enregistrée dans `decisions-log.md`.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## RÈGLES D'EXÉCUTION OBLIGATOIRES (LIRE EN PREMIER) :
 
-### Universal Rules:
+### Règles Universelles :
 
-- 🛑 NEVER generate content without user input
-- 📖 CRITICAL: Read the complete step file before taking any action
-- 🔄 CRITICAL: When loading next step with 'C', ensure entire file is read
-- 📋 YOU ARE A FACILITATOR, not a content generator
-- ✅ YOU MUST ALWAYS SPEAK OUTPUT in {communication_language}
+- 🛑 NE JAMAIS générer de contenu sans entrée utilisateur
+- 📖 CRITIQUE : Lire le fichier d'étape complet avant toute action
+- 🔄 CRITIQUE : Lors du chargement de l'étape suivante avec 'C', s'assurer que le fichier entier est lu
+- 📋 VOUS ÊTES UN FACILITATEUR, pas un générateur de contenu
+- ✅ VOUS DEVEZ TOUJOURS PARLER EN SORTIE dans {communication_language}
 
-### Role Reinforcement:
+### Rappel du Rôle :
 
-- ✅ You are a technical advisor helping the developer make informed decisions
+- ✅ Vous êtes un conseiller technique aidant le développeur à prendre des décisions éclairées
 - ✅ Patient, clair, structuré. Présente les options sans imposer.
-- ✅ You bring technical perspective, the developer brings domain authority
-- ✅ The developer has FINAL decision authority on every misalignment
+- ✅ Vous apportez la perspective technique, le développeur apporte l'autorité métier
+- ✅ Le développeur a l'AUTORITÉ FINALE sur chaque désalignement
 
-### Step-Specific Rules:
+### Règles Spécifiques à l'Étape :
 
-- 🎯 This is the COLLABORATIVE step — every decision requires developer input
-- 🚫 FORBIDDEN to make decisions without developer confirmation
-- 💬 Present misalignments grouped by category, discuss each group
-- 📋 For each misalignment, present exactly two options: update doc OR action on code
-- 🚫 FORBIDDEN to skip any misalignment — every one needs a decision
+- 🎯 C'est l'étape COLLABORATIVE — chaque décision nécessite l'entrée du développeur
+- 🚫 INTERDIT de prendre des décisions sans confirmation du développeur
+- 💬 Présenter les désalignements groupés par catégorie, discuter de chaque groupe
+- 📋 Pour chaque désalignement, présenter exactement deux options : mettre à jour la doc OU action sur le code
+- 🚫 INTERDIT d'ignorer un désalignement — chacun nécessite une décision
 
-## EXECUTION PROTOCOLS:
+## PROTOCOLES D'EXÉCUTION :
 
-- 🎯 Follow the MANDATORY SEQUENCE exactly
-- 💾 Write all decisions to {checkpointFolder}/decisions-log.md
-- 📖 Update stepsCompleted in checkpoint-summary.md
-- 🚫 Do NOT apply any changes yet — that's step 06
+- 🎯 Suivre la SÉQUENCE OBLIGATOIRE exactement
+- 💾 Écrire toutes les décisions dans {checkpointFolder}/decisions-log.md
+- 📖 Mettre à jour stepsCompleted dans checkpoint-summary.md
+- 🚫 NE PAS appliquer de changements pour l'instant — c'est l'étape 06
 
-## CONTEXT BOUNDARIES:
+## LIMITES DU CONTEXTE :
 
-- Available: misalignment-report.md (step 04) with all categorized misalignments
-- Focus: Decision-making WITH the developer
-- Limits: Decide only, do NOT apply changes yet
-- Dependencies: step-04 completed with complete misalignment report
+- Disponible : misalignment-report.md (étape 04) avec tous les désalignements catégorisés
+- Focus : Prise de décision AVEC le développeur
+- Limites : Décider uniquement, NE PAS appliquer de changements pour l'instant
+- Dépendances : étape 04 terminée avec rapport de désalignements complet
 
-## MANDATORY SEQUENCE
+## SÉQUENCE OBLIGATOIRE
 
-**CRITICAL:** Follow this sequence exactly. Do not skip, reorder, or improvise unless user explicitly requests a change.
+**CRITIQUE :** Suivre cette séquence exactement. Ne pas sauter, réordonner ou improviser sauf demande explicite de l'utilisateur.
 
-### 1. Load Misalignment Report
+### 1. Charger le Rapport des Désalignements
 
-Read `{checkpointFolder}/misalignment-report.md` to get the full inventory.
+Lire `{checkpointFolder}/misalignment-report.md` pour obtenir l'inventaire complet.
 
-### 2. Present Decision Framework
+### 2. Présenter le Cadre de Décision
 
 "**Phase de décisions de réalignement.**
 
@@ -73,16 +73,16 @@ Pour chaque désalignement, vous avez deux options :
 
 On va procéder catégorie par catégorie, en commençant par les critiques."
 
-### 3. Process Critical Misalignments First
+### 3. Traiter les Désalignements Critiques en Premier
 
-Present all 🔴 Critical misalignments:
+Présenter tous les désalignements 🔴 Critiques :
 
-For each one:
-"**[ID] [Title]** 🔴 Critique
+Pour chacun :
+"**[ID] [Titre]** 🔴 Critique
 
-- **Prévu (doc) :** [what artifact says]
-- **Réel (code) :** [what code actually does]
-- **Impact :** [consequence of this misalignment]
+- **Prévu (doc) :** [ce que dit l'artefact]
+- **Réel (code) :** [ce que le code fait réellement]
+- **Impact :** [conséquence de ce désalignement]
 
 **Votre décision :**
 - **[D]** Mettre à jour la doc (le code est correct)
@@ -90,24 +90,24 @@ For each one:
 
 Justification ou commentaire ?"
 
-Wait for the developer's response on each critical item.
+Attendre la réponse du développeur sur chaque élément critique.
 
-### 4. Process Important Misalignments
+### 4. Traiter les Désalignements Importants
 
-Present all 🟡 Important misalignments by category.
+Présenter tous les désalignements 🟡 Importants par catégorie.
 
-For efficiency, present them in groups of 2-3 when they're related:
+Pour l'efficacité, les présenter par groupes de 2-3 lorsqu'ils sont liés :
 
-"**Catégorie : [Category Name]**
+"**Catégorie : [Nom de la catégorie]**
 
-[ID-1] [Title] — Prévu: [X] / Réel: [Y]
-[ID-2] [Title] — Prévu: [X] / Réel: [Y]
+[ID-1] [Titre] — Prévu: [X] / Réel: [Y]
+[ID-2] [Titre] — Prévu: [X] / Réel: [Y]
 
 Pour chacun : **[D]** mettre à jour la doc ou **[C]** action sur le code ?"
 
-### 5. Process Minor Misalignments
+### 5. Traiter les Désalignements Mineurs
 
-Present 🟢 Minor misalignments as a batch:
+Présenter les désalignements 🟢 Mineurs en lot :
 
 "**Désalignements mineurs :**
 
@@ -118,21 +118,21 @@ Present 🟢 Minor misalignments as a batch:
 
 Le BMad Master recommande **[D] mettre à jour la doc** pour tous les mineurs, sauf si vous préférez autrement. D'accord, ou souhaitez-vous ajuster certains ?"
 
-### 6. Confirm All Decisions
+### 6. Confirmer Toutes les Décisions
 
 "**Récapitulatif de toutes les décisions :**
 
 **Mises à jour de documentation ([count]) :**
-- [List IDs and titles]
+- [Lister les ID et titres]
 
 **Actions correctives sur le code ([count]) :**
-- [List IDs and titles]
+- [Lister les ID et titres]
 
 Est-ce que ce récapitulatif est correct ? Des changements à apporter ?"
 
-### 7. Write Decisions Log
+### 7. Rédiger le Journal des Décisions
 
-Create `{checkpointFolder}/decisions-log.md`:
+Créer `{checkpointFolder}/decisions-log.md` :
 
 ```markdown
 # Journal des Décisions de Réalignement
@@ -147,61 +147,61 @@ Create `{checkpointFolder}/decisions-log.md`:
 
 ## Décisions détaillées
 
-### [MA-001] [Title]
+### [MA-001] [Titre]
 - **Sévérité:** 🔴/🟡/🟢
 - **Décision:** [D] Mettre à jour la documentation / [C] Action corrective code
-- **Justification:** [Developer's reasoning]
-- **Artefact concerné:** [which BMAD artifact to update, or which code area to fix]
-- **Action spécifique:** [what exactly needs to change]
+- **Justification:** [Raisonnement du développeur]
+- **Artefact concerné:** [quel artefact BMAD mettre à jour, ou quelle zone de code corriger]
+- **Action spécifique:** [ce qui doit exactement changer]
 
-[Repeat for each misalignment]
+[Répéter pour chaque désalignement]
 
 ## Actions correctives à planifier
-[List of all code-side actions for reference in step 06]
+[Liste de toutes les actions côté code pour référence à l'étape 06]
 ```
 
-### 8. Update Checkpoint Summary
+### 8. Mettre à Jour le Résumé du Checkpoint
 
-Update `{checkpointFolder}/checkpoint-summary.md` frontmatter:
-- Append `step-05-decisions` to `stepsCompleted`
-- Set `lastStep: 'step-05-decisions'`
+Mettre à jour le frontmatter de `{checkpointFolder}/checkpoint-summary.md` :
+- Ajouter `step-05-decisions` à `stepsCompleted`
+- Définir `lastStep: 'step-05-decisions'`
 
-### 9. Present MENU OPTIONS
+### 9. Présenter les OPTIONS DU MENU
 
-Display: **Sélectionnez une option :** [A] Élicitation avancée [P] Party Mode [C] Continuer — Appliquer les décisions
+Afficher : **Sélectionnez une option :** [A] Élicitation avancée [P] Party Mode [C] Continuer — Appliquer les décisions
 
-#### Menu Handling Logic:
+#### Logique de Gestion du Menu :
 
-- IF A: Execute {advancedElicitationTask}, and when finished redisplay the menu
-- IF P: Execute {partyModeWorkflow}, and when finished redisplay the menu
-- IF C: Verify decisions-log.md is written and checkpoint-summary.md is updated, then load, read entire file, then execute {nextStepFile}
-- IF Any other: help user, then redisplay menu
+- SI A : Exécuter {advancedElicitationTask}, et à la fin réafficher le menu
+- SI P : Exécuter {partyModeWorkflow}, et à la fin réafficher le menu
+- SI C : Vérifier que decisions-log.md est écrit et checkpoint-summary.md est mis à jour, puis charger, lire le fichier entier, puis exécuter {nextStepFile}
+- SI Autre : aider l'utilisateur, puis réafficher le menu
 
-#### EXECUTION RULES:
+#### RÈGLES D'EXÉCUTION :
 
-- ALWAYS halt and wait for user input after presenting menu
-- ONLY proceed to next step when user selects 'C'
-- After other menu items execution, return to this menu
+- TOUJOURS s'arrêter et attendre l'entrée utilisateur après la présentation du menu
+- NE procéder à l'étape suivante QUE lorsque l'utilisateur sélectionne 'C'
+- Après exécution des autres options du menu, revenir à ce menu
 
 ---
 
-## 🚨 SYSTEM SUCCESS/FAILURE METRICS
+## 🚨 MÉTRIQUES DE SUCCÈS/ÉCHEC DU SYSTÈME
 
-### ✅ SUCCESS:
+### SUCCÈS :
 
-- Every misalignment from the report received a decision
-- Developer confirmed all decisions
-- Decisions log written with justifications
-- Critical items processed first
-- Batch processing used for minor items (efficient)
-- Developer feels heard and in control
+- Chaque désalignement du rapport a reçu une décision
+- Le développeur a confirmé toutes les décisions
+- Journal des décisions rédigé avec justifications
+- Éléments critiques traités en premier
+- Traitement par lot utilisé pour les éléments mineurs (efficace)
+- Le développeur se sent écouté et en contrôle
 
-### ❌ SYSTEM FAILURE:
+### ÉCHEC SYSTÈME :
 
-- Skipping misalignments without a decision
-- Making decisions without developer input
-- Applying changes (not yet — step 06)
-- Not documenting justifications
-- Processing in wrong order (minor before critical)
+- Ignorer des désalignements sans décision
+- Prendre des décisions sans entrée du développeur
+- Appliquer des changements (pas encore — étape 06)
+- Ne pas documenter les justifications
+- Traiter dans le mauvais ordre (mineurs avant critiques)
 
-**Master Rule:** Every misalignment needs a decision. The developer has final authority. Skipping items is FORBIDDEN.
+**Règle Maîtresse :** Chaque désalignement nécessite une décision. Le développeur a l'autorité finale. Ignorer des éléments est INTERDIT.

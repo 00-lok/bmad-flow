@@ -1,70 +1,70 @@
 ---
 name: 'step-06-application'
-description: 'Apply documentation decisions by updating BMAD artifacts in-place and generate action items for code corrections'
+description: 'Appliquer les décisions de documentation en mettant à jour les artefacts BMAD sur place et générer les éléments d\'action pour les corrections de code'
 
 nextStepFile: './step-07-snapshot.md'
 checkpointFolder: '{checkpointFolder}'
 ---
 
-# Step 6: Application des Décisions
+# Étape 6 : Application des Décisions
 
-## STEP GOAL:
+## OBJECTIF DE L'ÉTAPE :
 
-To apply all documentation-update decisions by modifying the BMAD artifacts in their original locations, verify post-modification coherence, and compile all code-corrective actions into a prioritized `action-items.md` file.
+Appliquer toutes les décisions de mise à jour de documentation en modifiant les artefacts BMAD à leurs emplacements d'origine, vérifier la cohérence post-modification, et compiler toutes les actions correctives sur le code dans un fichier `action-items.md` priorisé.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## RÈGLES D'EXÉCUTION OBLIGATOIRES (LIRE EN PREMIER) :
 
-### Universal Rules:
+### Règles Universelles :
 
-- 🛑 NEVER generate content without user input
-- 📖 CRITICAL: Read the complete step file before taking any action
-- 🔄 CRITICAL: When loading next step with 'C', ensure entire file is read
-- 📋 YOU ARE A FACILITATOR, not a content generator
-- ✅ YOU MUST ALWAYS SPEAK OUTPUT in {communication_language}
-- ⚙️ TOOL/SUBPROCESS FALLBACK: If any instruction references a subprocess, subagent, or tool you do not have access to, you MUST still achieve the outcome in your main context thread
+- 🛑 NE JAMAIS générer de contenu sans entrée utilisateur
+- 📖 CRITIQUE : Lire le fichier d'étape complet avant toute action
+- 🔄 CRITIQUE : Lors du chargement de l'étape suivante avec 'C', s'assurer que le fichier entier est lu
+- 📋 VOUS ÊTES UN FACILITATEUR, pas un générateur de contenu
+- ✅ VOUS DEVEZ TOUJOURS PARLER EN SORTIE dans {communication_language}
+- ⚙️ REPLI OUTIL/SOUS-PROCESSUS : Si une instruction fait référence à un sous-processus, sous-agent ou outil auquel vous n'avez pas accès, vous DEVEZ malgré tout atteindre le résultat dans votre fil de contexte principal
 
-### Role Reinforcement:
+### Rappel du Rôle :
 
-- ✅ You are a meticulous documentation editor and consistency checker
+- ✅ Vous êtes un éditeur de documentation méticuleux et vérificateur de cohérence
 - ✅ Précis, méthodique. Chaque modification est exacte et vérifiée.
-- ✅ You bring expertise in maintaining document coherence across multiple artifacts
+- ✅ Vous apportez une expertise en maintien de la cohérence documentaire à travers plusieurs artefacts
 
-### Step-Specific Rules:
+### Règles Spécifiques à l'Étape :
 
-- 🎯 Apply ONLY the decisions marked as [D] (documentation update) from decisions-log.md
-- 🚫 FORBIDDEN to modify any code — only BMAD artifacts
-- 💬 For each artifact modified, verify it remains internally coherent
-- 🚫 FORBIDDEN to change decisions — apply exactly what was decided in step 05
-- 📋 After all modifications, verify cross-artifact coherence
+- 🎯 Appliquer UNIQUEMENT les décisions marquées [D] (mise à jour documentation) de decisions-log.md
+- 🚫 INTERDIT de modifier du code — uniquement les artefacts BMAD
+- 💬 Pour chaque artefact modifié, vérifier qu'il reste cohérent en interne
+- 🚫 INTERDIT de changer les décisions — appliquer exactement ce qui a été décidé à l'étape 05
+- 📋 Après toutes les modifications, vérifier la cohérence inter-artefacts
 
-## EXECUTION PROTOCOLS:
+## PROTOCOLES D'EXÉCUTION :
 
-- 🎯 Follow the MANDATORY SEQUENCE exactly
-- 💾 Modify artifacts in-place at their original locations
-- 💾 Write action-items.md to checkpoint folder
-- 📖 Update stepsCompleted in checkpoint-summary.md
-- 🚫 Do NOT skip any documentation-update decision
+- 🎯 Suivre la SÉQUENCE OBLIGATOIRE exactement
+- 💾 Modifier les artefacts sur place à leurs emplacements d'origine
+- 💾 Écrire action-items.md dans le dossier checkpoint
+- 📖 Mettre à jour stepsCompleted dans checkpoint-summary.md
+- 🚫 Ne PAS ignorer aucune décision de mise à jour de documentation
 
-## CONTEXT BOUNDARIES:
+## LIMITES DU CONTEXTE :
 
-- Available: decisions-log.md with all decisions and specific actions
-- Focus: Apply documentation updates, compile code actions
-- Limits: Only modify artifacts for [D] decisions, do NOT touch code
-- Dependencies: step-05 completed with confirmed decisions
+- Disponible : decisions-log.md avec toutes les décisions et actions spécifiques
+- Focus : Appliquer les mises à jour de documentation, compiler les actions code
+- Limites : Modifier uniquement les artefacts pour les décisions [D], NE PAS toucher au code
+- Dépendances : étape 05 terminée avec décisions confirmées
 
-## MANDATORY SEQUENCE
+## SÉQUENCE OBLIGATOIRE
 
-**CRITICAL:** Follow this sequence exactly. Do not skip, reorder, or improvise unless user explicitly requests a change.
+**CRITIQUE :** Suivre cette séquence exactement. Ne pas sauter, réordonner ou improviser sauf demande explicite de l'utilisateur.
 
-### 1. Load Decisions Log
+### 1. Charger le Journal des Décisions
 
-Read `{checkpointFolder}/decisions-log.md` to get all decisions.
+Lire `{checkpointFolder}/decisions-log.md` pour obtenir toutes les décisions.
 
-Separate into two lists:
-- **[D] Documentation updates** — artifacts to modify
-- **[C] Code corrective actions** — items for action-items.md
+Séparer en deux listes :
+- **[D] Mises à jour documentation** — artefacts à modifier
+- **[C] Actions correctives code** — éléments pour action-items.md
 
-### 2. Announce Application Start
+### 2. Annoncer le Démarrage de l'Application
 
 "**Application des décisions de réalignement.**
 
@@ -73,44 +73,44 @@ Separate into two lists:
 
 Le BMad Master applique maintenant les modifications aux artefacts BMAD."
 
-### 3. Apply Documentation Updates
+### 3. Appliquer les Mises à Jour de Documentation
 
-For each [D] decision:
+Pour chaque décision [D] :
 
-1. **Load** the target artifact at its original location
-2. **Apply** the specific modification documented in the decisions log
-3. **Verify** the artifact remains internally coherent after modification
-4. **Save** the modified artifact in-place
-5. **Log** what was changed, where, and the before/after summary
+1. **Charger** l'artefact cible à son emplacement d'origine
+2. **Appliquer** la modification spécifique documentée dans le journal des décisions
+3. **Vérifier** que l'artefact reste cohérent en interne après modification
+4. **Sauvegarder** l'artefact modifié sur place
+5. **Consigner** ce qui a été changé, où, et le résumé avant/après
 
-Present progress to the developer:
-"✅ [Artifact name] mis à jour — [brief description of change]"
+Présenter la progression au développeur :
+"✅ [Nom de l'artefact] mis à jour — [brève description du changement]"
 
-### 4. Cross-Artifact Coherence Verification
+### 4. Vérification de Cohérence Inter-Artifacts
 
-After all individual updates are applied:
+Après que toutes les mises à jour individuelles soient appliquées :
 
-- Re-read all modified artifacts
-- Verify that modifications don't create NEW inconsistencies between artifacts
-- If new inconsistencies are found, flag them to the developer:
+- Relire tous les artefacts modifiés
+- Vérifier que les modifications ne créent pas de NOUVELLES incohérences entre artefacts
+- Si de nouvelles incohérences sont trouvées, les signaler au développeur :
 
 "**⚠️ Vérification de cohérence post-modification :**
-La modification de [artifact A] crée une possible incohérence avec [artifact B] :
+La modification de [artefact A] crée une possible incohérence avec [artefact B] :
 - [Description]
 
-Souhaitez-vous que je corrige également [artifact B] pour maintenir la cohérence ?"
+Souhaitez-vous que je corrige également [artefact B] pour maintenir la cohérence ?"
 
-Apply additional corrections if developer agrees.
+Appliquer les corrections supplémentaires si le développeur accepte.
 
-### 5. Compile Code Action Items
+### 5. Compiler les Éléments d'Action Code
 
-For each [C] decision, compile into a structured action items list:
+Pour chaque décision [C], compiler dans une liste d'éléments d'action structurée :
 
-Group by priority (critical first) and by affected area.
+Grouper par priorité (critiques en premier) et par zone affectée.
 
-### 6. Write Action Items
+### 6. Rédiger les Éléments d'Action
 
-Create `{checkpointFolder}/action-items.md`:
+Créer `{checkpointFolder}/action-items.md` :
 
 ```markdown
 # Actions Correctives à Planifier
@@ -127,30 +127,30 @@ Create `{checkpointFolder}/action-items.md`:
 
 ### 🔴 Actions critiques
 
-#### [MA-ID] [Title]
-- **Zone du code:** [specific files/modules affected]
-- **Ce qu'il faut faire:** [specific corrective action]
-- **Pourquoi:** [reference to the original misalignment]
-- **Effort estimé:** [rough estimate if possible]
+#### [MA-ID] [Titre]
+- **Zone du code:** [fichiers/modules spécifiques affectés]
+- **Ce qu'il faut faire:** [action corrective spécifique]
+- **Pourquoi:** [référence au désalignement d'origine]
+- **Effort estimé:** [estimation approximative si possible]
 
 ### 🟡 Actions importantes
-[Same pattern]
+[Même schéma]
 
 ### 🟢 Actions mineures
-[Same pattern]
+[Même schéma]
 
 ## Suggestions de planification
-[Optional: group related actions into potential sprints or work packages]
+[Optionnel : regrouper les actions liées en sprints ou lots de travail potentiels]
 ```
 
-### 7. Report Application Results
+### 7. Rapporter les Résultats de l'Application
 
 "**Application terminée :**
 
 **Artefacts mis à jour ([count]) :**
-- ✅ [List each modified artifact with brief change description]
+- ✅ [Lister chaque artefact modifié avec brève description du changement]
 
-**Vérification de cohérence :** [Passed / Issues found and resolved]
+**Vérification de cohérence :** [Réussie / Problèmes trouvés et résolus]
 
 **Actions code compilées ([count]) :**
 - 🔴 [count] critiques
@@ -159,45 +159,45 @@ Create `{checkpointFolder}/action-items.md`:
 
 Le détail des actions est dans `action-items.md`."
 
-### 8. Update Checkpoint Summary
+### 8. Mettre à Jour le Résumé du Checkpoint
 
-Update `{checkpointFolder}/checkpoint-summary.md` frontmatter:
-- Append `step-06-application` to `stepsCompleted`
-- Set `lastStep: 'step-06-application'`
+Mettre à jour le frontmatter de `{checkpointFolder}/checkpoint-summary.md` :
+- Ajouter `step-06-application` à `stepsCompleted`
+- Définir `lastStep: 'step-06-application'`
 
-### 9. Present MENU OPTIONS
+### 9. Présenter les OPTIONS DU MENU
 
-Display: **[C] Continuer — Générer le snapshot final**
+Afficher : **[C] Continuer — Générer le snapshot final**
 
-#### Menu Handling Logic:
+#### Logique de Gestion du Menu :
 
-- IF C: Verify action-items.md is written, artifacts are updated, and checkpoint-summary.md is updated, then load, read entire file, then execute {nextStepFile}
-- IF Any other: help user, then redisplay menu
+- SI C : Vérifier que action-items.md est écrit, les artefacts sont mis à jour et checkpoint-summary.md est mis à jour, puis charger, lire le fichier entier, puis exécuter {nextStepFile}
+- SI Autre : aider l'utilisateur, puis réafficher le menu
 
-#### EXECUTION RULES:
+#### RÈGLES D'EXÉCUTION :
 
-- ALWAYS halt and wait for user input after presenting menu
-- ONLY proceed to next step when user selects 'C'
+- TOUJOURS s'arrêter et attendre l'entrée utilisateur après la présentation du menu
+- NE procéder à l'étape suivante QUE lorsque l'utilisateur sélectionne 'C'
 
 ---
 
-## 🚨 SYSTEM SUCCESS/FAILURE METRICS
+## 🚨 MÉTRIQUES DE SUCCÈS/ÉCHEC DU SYSTÈME
 
-### ✅ SUCCESS:
+### SUCCÈS :
 
-- Every [D] decision applied to the correct artifact
-- Artifacts modified in-place at their original locations
-- Post-modification coherence verified
-- New inconsistencies flagged and resolved
-- Complete action-items.md written with prioritized code actions
-- Developer informed of all changes made
+- Chaque décision [D] appliquée au bon artefact
+- Artefacts modifiés sur place à leurs emplacements d'origine
+- Cohérence post-modification vérifiée
+- Nouvelles incohérences signalées et résolues
+- action-items.md complet rédigé avec actions code priorisées
+- Développeur informé de tous les changements effectués
 
-### ❌ SYSTEM FAILURE:
+### ÉCHEC SYSTÈME :
 
-- Skipping documentation-update decisions
-- Modifying code (not this step's job)
-- Changing decisions made in step 05
-- Not verifying post-modification coherence
-- Creating new inconsistencies between artifacts
+- Ignorer des décisions de mise à jour de documentation
+- Modifier le code (ce n'est pas le rôle de cette étape)
+- Changer les décisions prises à l'étape 05
+- Ne pas vérifier la cohérence post-modification
+- Créer de nouvelles incohérences entre artefacts
 
-**Master Rule:** Apply exactly what was decided. Verify coherence after every change. Skipping items is FORBIDDEN.
+**Règle Maîtresse :** Appliquer exactement ce qui a été décidé. Vérifier la cohérence après chaque changement. Ignorer des éléments est INTERDIT.

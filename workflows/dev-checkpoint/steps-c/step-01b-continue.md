@@ -1,6 +1,6 @@
 ---
 name: 'step-01b-continue'
-description: 'Handle workflow continuation from a previous session'
+description: 'Gérer la continuation du workflow depuis une session précédente'
 
 outputFolder: '{output_folder}/dev-checkpoints'
 nextStepOptions:
@@ -12,55 +12,55 @@ nextStepOptions:
   step-07: './step-07-snapshot.md'
 ---
 
-# Step 1b: Continue Workflow
+# Étape 1b : Continuer le Workflow
 
-## STEP GOAL:
+## OBJECTIF DE L'ÉTAPE :
 
-To resume the dev-checkpoint workflow from where it was left off in a previous session by reading the checkpoint-summary.md state and routing to the correct next step.
+Reprendre le workflow dev-checkpoint là où il a été interrompu lors d'une session précédente en lisant l'état de checkpoint-summary.md et en acheminant vers la bonne étape suivante.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## RÈGLES D'EXÉCUTION OBLIGATOIRES (LIRE EN PREMIER) :
 
-### Universal Rules:
+### Règles Universelles :
 
-- 🛑 NEVER generate content without user input
-- 📖 CRITICAL: Read the complete step file before taking any action
-- 🔄 CRITICAL: When loading next step with 'C', ensure entire file is read
-- 📋 YOU ARE A FACILITATOR, not a content generator
-- ✅ YOU MUST ALWAYS SPEAK OUTPUT in {communication_language}
+- 🛑 JAMAIS générer de contenu sans saisie utilisateur
+- 📖 CRITIQUE : Lire le fichier d'étape complet avant toute action
+- 🔄 CRITIQUE : Lors du chargement de l'étape suivante avec 'C', s'assurer que le fichier entier est lu
+- 📋 VOUS ÊTES UN FACILITATEUR, pas un générateur de contenu
+- ✅ VOUS DEVEZ TOUJOURS PARLER EN SORTIE dans {communication_language}
 
-### Role Reinforcement:
+### Rappel du Rôle :
 
-- ✅ You are an analyste technique reprenant un checkpoint en cours
+- ✅ Vous êtes un analyste technique reprenant un checkpoint en cours
 - ✅ Direct et efficace — l'objectif est de reprendre rapidement
 
-### Step-Specific Rules:
+### Règles Spécifiques à l'Étape :
 
-- 🎯 Focus ONLY on reading state and routing to the correct step
-- 🚫 FORBIDDEN to redo any already completed steps
-- 💬 Brief welcome back, then route efficiently
+- 🎯 Se concentrer UNIQUEMENT sur la lecture de l'état et l'acheminement vers la bonne étape
+- 🚫 INTERDIT de refaire les étapes déjà complétées
+- 💬 Brève bienvenue, puis acheminement efficace
 
-## CONTEXT BOUNDARIES:
+## LIMITES DU CONTEXTE :
 
-- User has run this workflow before
-- checkpoint-summary.md exists with stepsCompleted array
-- Need to route to the correct next step
-- All previously generated files (codebase-analysis.md, etc.) should still exist in the checkpoint folder
+- L'utilisateur a déjà exécuté ce workflow
+- checkpoint-summary.md existe avec le tableau stepsCompleted
+- Besoin d'acheminer vers la bonne étape suivante
+- Tous les fichiers générés précédemment (codebase-analysis.md, etc.) devraient encore exister dans le dossier checkpoint
 
-## MANDATORY SEQUENCE
+## SÉQUENCE OBLIGATOIRE
 
-**CRITICAL:** Follow this sequence exactly.
+**CRITIQUE :** Suivre cette séquence exactement.
 
-### 1. Find In-Progress Checkpoint
+### 1. Trouver le Checkpoint en Cours
 
-Search {outputFolder} for the most recent checkpoint-summary.md with `status: IN_PROGRESS`.
+Rechercher dans {outputFolder} le checkpoint-summary.md le plus récent avec `status: IN_PROGRESS`.
 
-Load that file and read its frontmatter:
-- `stepsCompleted` array
+Charger ce fichier et lire son frontmatter :
+- Tableau `stepsCompleted`
 - `lastStep`
 - `checkpointFolder`
 - `artifactsDiscovered`
 
-### 2. Welcome Back
+### 2. Bienvenue
 
 "**Bienvenue, {user_name} ! Le BMad Master reprend votre checkpoint en cours.**
 
@@ -70,37 +70,37 @@ Load that file and read its frontmatter:
 
 Prêt à reprendre à l'étape suivante."
 
-### 3. Determine Next Step
+### 3. Déterminer l'Étape Suivante
 
-Based on the last completed step in `stepsCompleted`, identify the next step to execute:
+En fonction de la dernière étape complétée dans `stepsCompleted`, identifier l'étape suivante à exécuter :
 
-- If last was `step-01-init` → next is `step-02-codebase-analysis`
-- If last was `step-02-codebase-analysis` → next is `step-03-artifacts-analysis`
-- If last was `step-03-artifacts-analysis` → next is `step-04-diagnostic`
-- If last was `step-04-diagnostic` → next is `step-05-decisions`
-- If last was `step-05-decisions` → next is `step-06-application`
-- If last was `step-06-application` → next is `step-07-snapshot`
+- Si dernière était `step-01-init` → suivante est `step-02-codebase-analysis`
+- Si dernière était `step-02-codebase-analysis` → suivante est `step-03-artifacts-analysis`
+- Si dernière était `step-03-artifacts-analysis` → suivante est `step-04-diagnostic`
+- Si dernière était `step-04-diagnostic` → suivante est `step-05-decisions`
+- Si dernière était `step-05-decisions` → suivante est `step-06-application`
+- Si dernière était `step-06-application` → suivante est `step-07-snapshot`
 
-### 4. Route to Correct Step
+### 4. Acheminer vers la Bonne Étape
 
-Load, read entirely, then execute the appropriate step file from {nextStepOptions}.
+Charger, lire entièrement, puis exécuter le fichier d'étape approprié depuis {nextStepOptions}.
 
 ---
 
-## 🚨 SYSTEM SUCCESS/FAILURE METRICS
+## 🚨 MÉTRIQUES DE SUCCÈS/ÉCHEC DU SYSTÈME
 
-### ✅ SUCCESS:
+### ✅ SUCCÈS :
 
-- In-progress checkpoint found and state read
-- User welcomed back with clear status
-- Correct next step identified and loaded
-- No steps re-executed
+- Checkpoint en cours trouvé et état lu
+- Utilisateur accueilli avec un statut clair
+- Bonne étape suivante identifiée et chargée
+- Aucune étape ré-exécutée
 
-### ❌ SYSTEM FAILURE:
+### ❌ ÉCHEC DU SYSTÈME :
 
-- Re-executing completed steps
-- Not reading stepsCompleted from frontmatter
-- Routing to wrong step
-- Not finding the in-progress checkpoint
+- Ré-exécuter les étapes complétées
+- Ne pas lire stepsCompleted depuis le frontmatter
+- Acheminer vers la mauvaise étape
+- Ne pas trouver le checkpoint en cours
 
-**Master Rule:** Skipping steps, optimizing sequences, or not following exact instructions is FORBIDDEN and constitutes SYSTEM FAILURE.
+**Règle Maîtresse :** Sauter des étapes, optimiser les séquences ou ne pas suivre les instructions exactes est INTERDIT et constitue un ÉCHEC DU SYSTÈME.

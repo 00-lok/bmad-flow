@@ -1,117 +1,117 @@
 ---
 name: 'step-03-artifacts-analysis'
-description: 'Deep autonomous analysis of all existing BMAD planning artifacts'
+description: 'Analyse autonome approfondie de tous les artefacts de planification BMAD existants'
 
 nextStepFile: './step-04-diagnostic.md'
 checkpointFolder: '{checkpointFolder}'
 ---
 
-# Step 3: Analyse des Artefacts BMAD
+# Étape 3 : Analyse des Artefacts BMAD
 
-## STEP GOAL:
+## OBJECTIF DE L'ÉTAPE :
 
-To perform a comprehensive, autonomous review of every BMAD planning artifact discovered in step 01 — evaluating each artifact's content, completeness, internal coherence, and cross-artifact consistency — producing a detailed `artifacts-review.md` report in the checkpoint folder.
+Réaliser une revue autonome et complète de chaque artefact de planification BMAD découvert à l'étape 01 — évaluant le contenu, la complétude, la cohérence interne et la cohérence inter-artefacts de chaque artefact — produisant un rapport détaillé `artifacts-review.md` dans le dossier checkpoint.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## RÈGLES D'EXÉCUTION OBLIGATOIRES (LIRE EN PREMIER) :
 
-### Universal Rules:
+### Règles Universelles :
 
-- 🛑 NEVER generate content without user input
-- 📖 CRITICAL: Read the complete step file before taking any action
-- 🔄 CRITICAL: When loading next step with 'C', ensure entire file is read
-- 📋 YOU ARE A FACILITATOR, not a content generator
-- ✅ YOU MUST ALWAYS SPEAK OUTPUT in {communication_language}
-- ⚙️ TOOL/SUBPROCESS FALLBACK: If any instruction references a subprocess, subagent, or tool you do not have access to, you MUST still achieve the outcome in your main context thread
+- 🛑 JAMAIS générer de contenu sans saisie utilisateur
+- 📖 CRITIQUE : Lire le fichier d'étape complet avant toute action
+- 🔄 CRITIQUE : Lors du chargement de l'étape suivante avec 'C', s'assurer que le fichier entier est lu
+- 📋 VOUS ÊTES UN FACILITATEUR, pas un générateur de contenu
+- ✅ VOUS DEVEZ TOUJOURS PARLER EN SORTIE dans {communication_language}
+- ⚙️ REPLI OUTIL/SOUS-PROCESSUS : Si une instruction fait référence à un sous-processus, sous-agent ou outil auquel vous n'avez pas accès, vous DEVEZ malgré tout atteindre le résultat dans votre fil de contexte principal
 
-### Role Reinforcement:
+### Rappel du Rôle :
 
-- ✅ You are an expert BMAD methodology analyst and documentation reviewer
+- ✅ Vous êtes un expert analyste méthodologie BMAD et réviseur de documentation
 - ✅ Rigoureux, méthodique. Analyse chaque artefact en profondeur.
-- ✅ You bring expertise in BMAD artifact structure, completeness criteria, and cross-document coherence
+- ✅ Vous apportez une expertise en structure des artefacts BMAD, critères de complétude et cohérence inter-documents
 
-### Step-Specific Rules:
+### Règles Spécifiques à l'Étape :
 
 - 🎯 Analyse approfondie et autonome de chaque artefact BMAD
-- 🚫 FORBIDDEN to compare with code in this step — comparison happens in step-04
-- 💬 Subprocess Pattern 2: DO NOT BE LAZY — For EACH artifact, launch a subprocess for deep analysis
-- ⚙️ If subprocess unavailable, analyze each artifact sequentially in main thread
-- 🚫 DO NOT BE LAZY — read and analyze every artifact completely
+- 🚫 INTERDIT de comparer avec le code dans cette étape — la comparaison se fait à l'étape 04
+- 💬 Pattern Sous-processus 2 : NE PAS ÊTRE PARESSEUX — Pour CHAQUE artefact, lancer un sous-processus pour une analyse approfondie
+- ⚙️ Si sous-processus indisponible, analyser chaque artefact séquentiellement dans le fil principal
+- 🚫 NE PAS ÊTRE PARESSEUX — lire et analyser chaque artefact complètement
 
-## EXECUTION PROTOCOLS:
+## PROTOCOLES D'EXÉCUTION :
 
-- 🎯 Follow the MANDATORY SEQUENCE exactly
-- 💾 Write complete analysis to {checkpointFolder}/artifacts-review.md
-- 📖 Update stepsCompleted in checkpoint-summary.md
-- 🚫 Do NOT skip any artifact — thoroughness is critical
+- 🎯 Suivre la SÉQUENCE OBLIGATOIRE exactement
+- 💾 Écrire l'analyse complète dans {checkpointFolder}/artifacts-review.md
+- 📖 Mettre à jour stepsCompleted dans checkpoint-summary.md
+- 🚫 NE PAS sauter d'artefact — la rigueur est critique
 
-## CONTEXT BOUNDARIES:
+## LIMITES DU CONTEXTE :
 
-- Available: checkpoint-summary.md with artifactsDiscovered list and paths
-- Focus: BMAD artifacts ONLY — no code comparison yet
-- Limits: Evaluate artifacts as documents, don't compare to code
-- Dependencies: step-01 (artifact list), step-02 completed
+- Disponible : checkpoint-summary.md avec la liste artifactsDiscovered et les chemins
+- Focus : Artefacts BMAD UNIQUEMENT — pas encore de comparaison avec le code
+- Limites : Évaluer les artefacts en tant que documents, ne pas comparer au code
+- Dépendances : étape 01 (liste des artefacts), étape 02 complétée
 
-## MANDATORY SEQUENCE
+## SÉQUENCE OBLIGATOIRE
 
-**CRITICAL:** Follow this sequence exactly. Do not skip, reorder, or improvise unless user explicitly requests a change.
+**CRITIQUE :** Suivre cette séquence exactement. Ne pas sauter, réordonner ou improviser sauf si l'utilisateur demande explicitement un changement.
 
-### 1. Announce Analysis Start
+### 1. Annoncer le Démarrage de l'Analyse
 
 "**Lancement de l'analyse des artefacts BMAD.**
 Le BMad Master va lire et analyser chaque document de planification détecté."
 
-### 2. Load Artifact List
+### 2. Charger la Liste des Artefacts
 
-Read `{checkpointFolder}/checkpoint-summary.md` to get the `artifactsDiscovered` list with file paths.
+Lire `{checkpointFolder}/checkpoint-summary.md` pour obtenir la liste `artifactsDiscovered` avec les chemins des fichiers.
 
-### 3. Analyze Each Artifact
+### 3. Analyser Chaque Artefact
 
-DO NOT BE LAZY — For EACH artifact in the discovered list, launch a subprocess (or analyze sequentially if unavailable) that:
+NE PAS ÊTRE PARESSEUX — Pour CHAQUE artefact de la liste découverte, lancer un sous-processus (ou analyser séquentiellement si indisponible) qui :
 
-1. Loads and reads the complete artifact
-2. Analyzes:
+1. Charge et lit l'artefact complet
+2. Analyse :
    - **Complétude** : Toutes les sections attendues sont-elles présentes et remplies ?
    - **Clarté** : Les descriptions sont-elles claires, non ambiguës ?
    - **Cohérence interne** : Les informations au sein du document sont-elles cohérentes ?
    - **Niveau de détail** : Le document est-il suffisamment détaillé pour guider le développement ?
    - **Qualité des décisions** : Les choix documentés sont-ils justifiés ?
    - **Maturité** : Le document semble-t-il finalisé ou en brouillon ?
-3. Returns structured findings per artifact
+3. Retourne des constats structurés par artefact
 
-**For each artifact type, evaluate specific criteria:**
+**Pour chaque type d'artefact, évaluer les critères spécifiques :**
 
-**Product Brief:**
-- Problem statement clarity, target audience, value proposition, scope
+**Product Brief :**
+- Clarté de l'énoncé du problème, audience cible, proposition de valeur, périmètre
 
-**PRD:**
-- Functional requirements completeness, user stories, acceptance criteria, NFRs, success metrics
+**PRD :**
+- Complétude des exigences fonctionnelles, user stories, critères d'acceptation, NFRs, métriques de succès
 
-**Architecture:**
-- Tech stack decisions, component structure, data model, API design, security, deployment, scalability
+**Architecture :**
+- Décisions de stack technique, structure des composants, modèle de données, conception API, sécurité, déploiement, scalabilité
 
-**UX Design:**
-- User flows, wireframes/mockups references, design system, accessibility, responsive design
+**UX Design :**
+- Parcours utilisateur, références wireframes/maquettes, design system, accessibilité, design responsive
 
-**Epics & Stories:**
-- Coverage of PRD requirements, acceptance criteria, dependencies, estimation, priority
+**Epics & Stories :**
+- Couverture des exigences du PRD, critères d'acceptation, dépendances, estimation, priorité
 
-**Project Context:**
-- Accuracy, completeness, up-to-date information
+**Project Context :**
+- Exactitude, complétude, informations à jour
 
-### 4. Cross-Artifact Coherence Check
+### 4. Vérification de la Cohérence Inter-Artefacts
 
-After analyzing each artifact individually, evaluate coherence BETWEEN artifacts:
+Après avoir analysé chaque artefact individuellement, évaluer la cohérence ENTRE les artefacts :
 
-- Do the PRD requirements align with the Product Brief vision?
-- Does the Architecture support all PRD functional requirements?
-- Do the Stories cover all PRD requirements?
-- Does the UX Design align with the PRD user experience expectations?
-- Are there contradictions between any two artifacts?
-- Are naming conventions consistent across artifacts?
+- Les exigences du PRD sont-elles alignées avec la vision du Product Brief ?
+- L'Architecture supporte-t-elle toutes les exigences fonctionnelles du PRD ?
+- Les Stories couvrent-elles toutes les exigences du PRD ?
+- Le UX Design est-il aligné avec les attentes d'expérience utilisateur du PRD ?
+- Y a-t-il des contradictions entre deux artefacts ?
+- Les conventions de nommage sont-elles cohérentes entre les artefacts ?
 
-### 5. Write Artifacts Review Report
+### 5. Rédiger le Rapport de Revue des Artefacts
 
-Create `{checkpointFolder}/artifacts-review.md` with the following semi-structured format:
+Créer `{checkpointFolder}/artifacts-review.md` avec le format semi-structuré suivant :
 
 ```markdown
 # Revue des Artefacts BMAD
@@ -146,53 +146,53 @@ Create `{checkpointFolder}/artifacts-review.md` with the following semi-structur
 - Artefacts manquants recommandés: X
 ```
 
-### 6. Update Checkpoint Summary
+### 6. Mettre à Jour la Synthèse du Checkpoint
 
-Update `{checkpointFolder}/checkpoint-summary.md` frontmatter:
-- Append `step-03-artifacts-analysis` to `stepsCompleted`
-- Set `lastStep: 'step-03-artifacts-analysis'`
+Mettre à jour le frontmatter de `{checkpointFolder}/checkpoint-summary.md` :
+- Ajouter `step-03-artifacts-analysis` à `stepsCompleted`
+- Définir `lastStep: 'step-03-artifacts-analysis'`
 
-### 7. Present Results Summary
+### 7. Présenter le Résumé des Résultats
 
 "**Analyse des artefacts BMAD terminée. Voici les points clés :**
 - [Nombre] artefacts analysés
-- [Key coherence findings]
-- [Most significant gaps or issues]
+- [Constats clés de cohérence]
+- [Lacunes ou problèmes les plus significatifs]
 
 Le rapport complet est dans `artifacts-review.md`. Prêt pour le diagnostic des désalignements."
 
-### 8. Present MENU OPTIONS
+### 8. Présenter les OPTIONS DU MENU
 
-Display: **[C] Continuer — Lancer le diagnostic des désalignements**
+Afficher : **[C] Continuer — Lancer le diagnostic des désalignements**
 
-#### Menu Handling Logic:
+#### Logique de Gestion du Menu :
 
-- IF C: Verify artifacts-review.md is written and checkpoint-summary.md is updated, then load, read entire file, then execute {nextStepFile}
-- IF Any other: help user, then redisplay menu
+- SI C : Vérifier que artifacts-review.md est écrit et checkpoint-summary.md est mis à jour, puis charger, lire le fichier entier, puis exécuter {nextStepFile}
+- SI Autre : aider l'utilisateur, puis réafficher le menu
 
-#### EXECUTION RULES:
+#### RÈGLES D'EXÉCUTION :
 
-- ALWAYS halt and wait for user input after presenting menu
-- ONLY proceed to next step when user selects 'C'
+- TOUJOURS s'arrêter et attendre la saisie utilisateur après présentation du menu
+- NE passer à l'étape suivante QUE lorsque l'utilisateur sélectionne 'C'
 
 ---
 
-## 🚨 SYSTEM SUCCESS/FAILURE METRICS
+## 🚨 MÉTRIQUES DE SUCCÈS/ÉCHEC DU SYSTÈME
 
-### ✅ SUCCESS:
+### ✅ SUCCÈS :
 
-- Every discovered artifact fully read and analyzed
-- Completeness, clarity, coherence evaluated per artifact
-- Cross-artifact coherence checked
-- Complete artifacts-review.md written to checkpoint folder
-- stepsCompleted updated in checkpoint-summary.md
+- Chaque artefact découvert entièrement lu et analysé
+- Complétude, clarté, cohérence évaluées par artefact
+- Cohérence inter-artefacts vérifiée
+- Rapport artifacts-review.md complet écrit dans le dossier checkpoint
+- stepsCompleted mis à jour dans checkpoint-summary.md
 
-### ❌ SYSTEM FAILURE:
+### ❌ ÉCHEC DU SYSTÈME :
 
-- Skipping any artifact from the discovered list
-- Superficial analysis without reading complete artifacts
-- Comparing with code (not yet — step 04)
-- Not evaluating cross-artifact coherence
-- Not writing the complete report
+- Sauter un artefact de la liste découverte
+- Analyse superficielle sans lire les artefacts complets
+- Comparer avec le code (pas encore — étape 04)
+- Ne pas évaluer la cohérence inter-artefacts
+- Ne pas rédiger le rapport complet
 
-**Master Rule:** Every artifact must be read completely and analyzed in depth. Skipping or surface-level review is FORBIDDEN.
+**Règle Maîtresse :** Chaque artefact doit être lu complètement et analysé en profondeur. Sauter ou faire une revue superficielle est INTERDIT.

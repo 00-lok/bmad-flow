@@ -1,0 +1,22 @@
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (if testing tooling is added)
+node_modules/
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# BMAD output (should not be in the repo)
+_bmad-output/

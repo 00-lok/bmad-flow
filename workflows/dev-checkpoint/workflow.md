@@ -1,6 +1,6 @@
 ---
 name: Dev Checkpoint
-description: Workflow de réconciliation et réalignement du contexte projet BMAD avec la réalité du code source
+description: État des lieux complet du développement — analyse le code et les artefacts BMAD, identifie les divergences entre le plan et la réalité, et réaligne la documentation pour en refaire une source de vérité fiable
 web_bundle: true
 ---
 

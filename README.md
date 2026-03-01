@@ -12,7 +12,7 @@
 
 | Workflow | Module | Description | Quand l'utiliser |
 |----------|--------|-------------|------------------|
-| [dev-checkpoint](workflows/dev-checkpoint/) | BMM | Réconcilier les artefacts BMAD avec la réalité du code | Vos documents de planification ont divergé de votre code |
+| [dev-checkpoint](workflows/dev-checkpoint/) | BMM | État des lieux complet du développement : analyse le code et les artefacts BMAD, identifie les divergences, et réaligne la documentation avec la réalité du projet | Après une phase de dev significative, quand vos docs de planification ne reflètent plus le code réel |
 | [smart-commit](workflows/smart-commit/) | Core | Analyser et commiter intelligemment les changements | Vous avez des changements à commiter proprement |
 
 ## Intégration en 4 Étapes
@@ -45,7 +45,7 @@ BMAD_Customs_Workflows/
 │   ├── getting-started.md     # Guide d'intégration complet (manifeste + commandes IDE)
 │   └── workflow-anatomy.md    # Comprendre l'architecture des workflows BMAD
 └── workflows/
-    ├── dev-checkpoint/        # Réconciliation artefacts BMAD ↔ code
+    ├── dev-checkpoint/        # État des lieux dev + réalignement artefacts BMAD
     │   ├── README.md          # Documentation + instructions d'intégration
     │   ├── workflow.md        # Point d'entrée du workflow
     │   ├── workflow-plan.md   # Document de conception

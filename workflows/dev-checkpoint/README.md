@@ -1,16 +1,16 @@
 # Dev Checkpoint
 
-> Réconciliez vos artefacts de planification BMAD avec la réalité de votre codebase.
+> Faites le point sur l'état réel de votre développement, identifiez les écarts entre vos plans et votre code, et réalignez vos artefacts BMAD pour qu'ils redeviennent une source de vérité fiable.
 
 ## Le Problème
 
-En cours de développement, vos artefacts BMAD (PRD, architecture, stories...) s'écartent inévitablement de votre code réel. Des fonctionnalités sont ajoutées sans être documentées. Les décisions d'architecture changent sans mise à jour des docs. Les stories sont implémentées différemment de ce qui était prévu.
+Au fil du développement, la réalité du code s'éloigne naturellement de ce qui a été planifié. Des fonctionnalités sont ajoutées ou modifiées sans mise à jour de la documentation. Des décisions d'architecture prises en cours de route ne sont jamais reflétées dans les artefacts. Le PRD décrit des choses qui n'existent plus, et des stories sont implémentées différemment de ce qui était prévu.
 
-Cette dérive dégrade votre développement assisté par IA car l'IA travaille avec un contexte obsolète qui ne reflète plus le projet réel.
+Résultat : votre IA de développement travaille avec un contexte obsolète. Elle prend des décisions basées sur une vision du projet qui ne correspond plus à la réalité — ce qui dégrade la qualité de l'assistance et génère des erreurs évitables.
 
 ## Ce Que Fait Ce Workflow
 
-**Dev Checkpoint** effectue une réconciliation complète en 7 étapes :
+**Dev Checkpoint** réalise un état des lieux complet de votre projet en 7 étapes — il analyse le code, lit chaque artefact BMAD, identifie toutes les divergences, vous aide à prendre des décisions de réalignement, puis met à jour vos documents automatiquement :
 
 | Étape | Mode | Description |
 |-------|------|-------------|
@@ -58,7 +58,7 @@ cp -r workflows/dev-checkpoint/ votre-projet/_bmad/bmm/workflows/4-implementatio
 Ajoutez cette ligne à la fin de `_bmad/_config/workflow-manifest.csv` dans votre projet :
 
 ```csv
-"dev-checkpoint","Workflow de réconciliation et réalignement du contexte projet BMAD avec la réalité du code source. Utiliser quand l'utilisateur dit ""dev checkpoint"" ou ""faire un point de dev"" ou ""réconcilier les artefacts""","bmm","_bmad/bmm/workflows/4-implementation/dev-checkpoint/workflow.md"
+"dev-checkpoint","État des lieux complet du développement — analyse le code et les artefacts BMAD, identifie les divergences et réaligne la documentation. Utiliser quand l'utilisateur dit ""dev checkpoint"" ou ""faire un point de dev"" ou ""état des lieux du projet""","bmm","_bmad/bmm/workflows/4-implementation/dev-checkpoint/workflow.md"
 ```
 
 ### 3. Créer la commande IDE
@@ -72,7 +72,7 @@ Créez `.cursor/commands/bmad-bmm-dev-checkpoint.md` :
 ```markdown
 ---
 name: 'dev-checkpoint'
-description: 'Réconciliation et réalignement du contexte projet BMAD avec la réalité du code source.'
+description: 'État des lieux du développement — analyse code et artefacts BMAD, identifie les divergences et réaligne la documentation.'
 ---
 
 IT IS CRITICAL THAT YOU FOLLOW THIS COMMAND: LOAD the FULL {project-root}/_bmad/bmm/workflows/4-implementation/dev-checkpoint/workflow.md, READ its entire contents and follow its directions exactly!
@@ -85,7 +85,7 @@ Créez `.claude/commands/bmad-bmm-dev-checkpoint.md` :
 ```markdown
 ---
 name: 'dev-checkpoint'
-description: 'Réconciliation et réalignement du contexte projet BMAD avec la réalité du code source.'
+description: 'État des lieux du développement — analyse code et artefacts BMAD, identifie les divergences et réaligne la documentation.'
 ---
 
 IT IS CRITICAL THAT YOU FOLLOW THIS COMMAND: LOAD the FULL {project-root}/_bmad/bmm/workflows/4-implementation/dev-checkpoint/workflow.md, READ its entire contents and follow its directions exactly!
@@ -96,7 +96,7 @@ IT IS CRITICAL THAT YOU FOLLOW THIS COMMAND: LOAD the FULL {project-root}/_bmad/
 Créez `.gemini/commands/bmad-bmm-dev-checkpoint.toml` :
 
 ```toml
-description = "Réconciliation et réalignement du contexte projet BMAD avec la réalité du code source."
+description = "État des lieux du développement — analyse code et artefacts BMAD, identifie les divergences et réaligne la documentation."
 prompt = """
 Execute the BMAD 'dev-checkpoint' workflow.
 
@@ -118,7 +118,7 @@ Créez `.github/prompts/bmad-bmm-dev-checkpoint.prompt.md` :
 
 ```markdown
 ---
-description: 'Dev checkpoint — réconciliation artefacts BMAD'
+description: 'Dev checkpoint — état des lieux dev et réalignement artefacts BMAD'
 agent: 'agent'
 tools: ['read', 'edit', 'search', 'execute']
 ---

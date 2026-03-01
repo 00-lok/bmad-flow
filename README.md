@@ -1,89 +1,80 @@
 # BMAD Custom Workflows
 
-> A curated collection of custom workflows for the [BMAD Method](https://github.com/bmadcode/BMAD-METHOD) — ready to drop into any BMAD-powered project.
+> Une collection de workflows personnalisés pour la [BMAD Method](https://github.com/bmadcode/BMAD-METHOD) — prêts à être intégrés dans n'importe quel projet BMAD.
 
-## What is BMAD?
+## Qu'est-ce que BMAD ?
 
-**BMAD** (BMad Agentic Development) is a methodology for AI-assisted software development. It uses structured agents, workflows, and artifacts to guide projects from ideation to deployment. Workflows are step-by-step processes that AI agents follow to accomplish specific tasks.
+**BMAD** (BMad Agentic Development) est une méthodologie pour le développement logiciel assisté par IA. Elle utilise des agents structurés, des workflows et des artefacts pour guider les projets de l'idéation au déploiement. Les workflows sont des processus étape par étape que les agents IA suivent pour accomplir des tâches spécifiques.
 
-**This repository** contains custom workflows that extend the standard BMAD toolkit with specialized capabilities.
+**Ce dépôt** contient des workflows personnalisés qui étendent la boîte à outils BMAD standard avec des capacités spécialisées.
 
-## Available Workflows
+## Workflows Disponibles
 
-| Workflow | Description | Use When |
-|----------|-------------|----------|
-| [dev-checkpoint](workflows/dev-checkpoint/) | Reconcile BMAD artifacts with code reality | Your planning docs have drifted from your actual codebase |
+| Workflow | Module | Description | Quand l'utiliser |
+|----------|--------|-------------|------------------|
+| [dev-checkpoint](workflows/dev-checkpoint/) | BMM | Réconcilier les artefacts BMAD avec la réalité du code | Vos documents de planification ont divergé de votre code |
+| [smart-commit](workflows/smart-commit/) | Core | Analyser et commiter intelligemment les changements | Vous avez des changements à commiter proprement |
 
-## Quick Start
+## Intégration en 4 Étapes
 
-### 1. Prerequisites
+Pour intégrer un workflow dans votre projet BMAD :
 
-- A project using the [BMAD Method](https://github.com/bmadcode/BMAD-METHOD) (v6+)
-- An AI-powered IDE (Claude Code, Cursor, Windsurf, etc.)
-- An existing `_bmad/` folder in your project
+1. **Copier** le dossier du workflow dans `_bmad/{module}/workflows/` de votre projet
+2. **Enregistrer** le workflow dans `_bmad/_config/workflow-manifest.csv`
+3. **Créer la commande IDE** dans `.cursor/commands/`, `.claude/commands/`, etc.
+4. **Lancer** via `/bmad-nom-du-workflow` dans un nouveau chat
 
-### 2. Install a Workflow
+Chaque workflow fournit dans son README les lignes exactes à copier-coller pour les étapes 2 et 3.
 
-Copy the workflow folder into your project's BMAD module directory:
+> Pour le guide complet avec les templates par IDE, voir [docs/getting-started.md](docs/getting-started.md).
 
-```bash
-# Example: install dev-checkpoint into the BMM module
-cp -r workflows/dev-checkpoint/ your-project/_bmad/bmm/workflows/4-implementation/dev-checkpoint/
-```
+## Prérequis
 
-### 3. Use It
+- Un projet utilisant la [BMAD Method](https://github.com/bmadcode/BMAD-METHOD) (v6+)
+- Un IDE assisté par IA (Claude Code, Cursor, Windsurf, etc.)
+- Un dossier `_bmad/` existant dans votre projet
 
-Launch the workflow from your AI IDE using the BMAD command system:
-
-```
-/bmad-bmm-dev-checkpoint
-```
-
-Or ask your AI assistant:
-
-```
-"Run the dev checkpoint workflow"
-```
-
-> For detailed installation instructions, see [docs/getting-started.md](docs/getting-started.md).
-
-## Repository Structure
+## Structure du Dépôt
 
 ```
 BMAD_Customs_Workflows/
-├── README.md                  # You are here
-├── CONTRIBUTING.md            # How to contribute your own workflows
-├── LICENSE                    # MIT License
+├── README.md                  # Vous êtes ici
+├── CONTRIBUTING.md            # Comment contribuer vos propres workflows
+├── LICENSE                    # Licence MIT
 ├── docs/
-│   ├── getting-started.md     # Installation & first use guide
-│   └── workflow-anatomy.md    # Understanding BMAD workflow architecture
+│   ├── getting-started.md     # Guide d'intégration complet (manifeste + commandes IDE)
+│   └── workflow-anatomy.md    # Comprendre l'architecture des workflows BMAD
 └── workflows/
-    └── dev-checkpoint/        # Each workflow in its own folder
-        ├── README.md          # Workflow documentation
-        ├── workflow.md        # Workflow definition (entry point)
-        ├── workflow-plan.md   # Design document (for transparency)
-        ├── data/              # Templates and data files
-        └── steps-c/           # Step files (executed sequentially)
+    ├── dev-checkpoint/        # Réconciliation artefacts BMAD ↔ code
+    │   ├── README.md          # Documentation + instructions d'intégration
+    │   ├── workflow.md        # Point d'entrée du workflow
+    │   ├── workflow-plan.md   # Document de conception
+    │   ├── data/              # Templates et fichiers de données
+    │   └── steps-c/           # Fichiers d'étapes (exécutés séquentiellement)
+    └── smart-commit/          # Commits intelligents et atomiques
+        ├── README.md          # Documentation + instructions d'intégration
+        ├── workflow.md        # Point d'entrée du workflow
+        └── steps-c/           # Fichiers d'étapes
 ```
 
-## How Workflows Work
+## Comment Fonctionnent les Workflows
 
-Each workflow follows the **BMAD micro-file architecture**:
+Chaque workflow suit l'**architecture micro-fichiers BMAD** :
 
-1. **`workflow.md`** is the entry point — it defines the goal, role, and rules
-2. **Step files** in `steps-c/` are loaded one at a time (just-in-time loading)
-3. Steps execute sequentially — no skipping or reordering
-4. Progress is tracked in output file frontmatter
-5. Menus at the end of each step let you control the pace
+1. **`workflow.md`** est le point d'entrée — il définit l'objectif, le rôle et les règles
+2. **Les fichiers d'étapes** dans `steps-c/` sont chargés un à la fois (chargement juste-à-temps)
+3. Les étapes s'exécutent séquentiellement — pas de saut ni de réordonnancement
+4. La progression est suivie dans le frontmatter des fichiers de sortie
+5. Les menus à la fin de chaque étape vous permettent de contrôler le rythme
 
-> For a deeper understanding, see [docs/workflow-anatomy.md](docs/workflow-anatomy.md).
+> Pour une compréhension approfondie, voir [docs/workflow-anatomy.md](docs/workflow-anatomy.md).
 
-## Contributing
+## Contribuer
 
-We welcome contributions! If you've built a useful BMAD workflow, consider sharing it.
+Les contributions sont les bienvenues ! Si vous avez construit un workflow BMAD utile, envisagez de le partager.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Voir [CONTRIBUTING.md](CONTRIBUTING.md) pour les directives.
 
-## License
+## Licence
 
-This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
+Ce projet est sous licence MIT — voir [LICENSE](LICENSE) pour les détails.

@@ -1,122 +1,137 @@
-# Contributing
+# Contribuer
 
-Thank you for your interest in contributing custom BMAD workflows! This guide explains how to submit your own workflow to this collection.
+Merci de votre intérêt pour la contribution de workflows BMAD personnalisés ! Ce guide explique comment soumettre votre propre workflow à cette collection.
 
-## Before You Start
+## Avant de Commencer
 
-Make sure your workflow:
+Assurez-vous que votre workflow :
 
-1. **Solves a real problem** — It should address a gap in the standard BMAD toolkit
-2. **Is reusable** — It should work on any BMAD project, not just your specific one
-3. **Follows BMAD conventions** — Uses the micro-file architecture, state tracking, and menu system
-4. **Is tested** — You've used it successfully on at least one project
+1. **Résout un vrai problème** — Il doit combler un manque dans la boîte à outils BMAD standard
+2. **Est réutilisable** — Il doit fonctionner sur n'importe quel projet BMAD, pas seulement le vôtre
+3. **Respecte les conventions BMAD** — Utilise l'architecture micro-fichiers, le suivi d'état et le système de menus
+4. **Est testé** — Vous l'avez utilisé avec succès sur au moins un projet
 
-## Workflow Requirements
+## Exigences pour les Workflows
 
-### File Structure
+### Structure des Fichiers
 
-Your workflow must follow this structure:
+Votre workflow doit suivre cette structure :
 
 ```
-your-workflow/
-├── README.md                # Required — documentation for users
-├── workflow.md              # Required — entry point
-├── workflow-plan.md         # Recommended — design rationale
-├── data/                    # Optional — templates, schemas
+votre-workflow/
+├── README.md                # Obligatoire — documentation pour les utilisateurs
+├── workflow.md              # Obligatoire — point d'entrée
+├── workflow-plan.md         # Recommandé — justification de la conception
+├── data/                    # Optionnel — templates, schémas
 │   └── ...
-└── steps-c/                 # Required — step files
+└── steps-c/                 # Obligatoire — fichiers d'étapes
     ├── step-01-init.md
-    ├── step-01b-continue.md # Required if continuable
+    ├── step-01b-continue.md # Obligatoire si continuable
     ├── step-02-*.md
     └── ...
 ```
 
-### README Requirements
+### Exigences du README
 
-Your workflow README must include:
+Le README de votre workflow doit inclure :
 
-- **The Problem** — What problem does this solve?
-- **What It Does** — Step-by-step overview
-- **What You Get** — Output files and their purpose
-- **Installation** — How to add it to a project
-- **How to Launch** — Command to run it
-- **When to Use** — Scenarios where this workflow is valuable
-- **Module Info** — Which BMAD module it belongs to
+- **Le Problème** — Quel problème cela résout-il ?
+- **Ce qu'il fait** — Aperçu étape par étape
+- **Ce que vous obtenez** — Fichiers de sortie et leur utilité
+- **Installation complète** — Les 4 étapes : copier, manifeste, commande IDE, lancer
+- **Ligne de manifeste CSV** — Ligne exacte prête à copier-coller pour `workflow-manifest.csv`
+- **Templates de commande IDE** — Templates pré-remplis pour Cursor, Claude, Gemini, GitHub Copilot
+- **Comment le lancer** — Commande et déclencheurs en langage naturel
+- **Quand l'utiliser** — Scénarios où ce workflow est précieux
+- **Info Module** — Module cible, type de session, config requise
 
-### Workflow Conventions
+### Conventions des Workflows
 
-- Use frontmatter in all `.md` files
-- Include `MANDATORY EXECUTION RULES` in every step
-- Include `SYSTEM SUCCESS/FAILURE METRICS` in every step
-- End every step with a menu that halts execution
-- Track progress in `stepsCompleted` frontmatter
-- Use `{variable}` syntax for config values (not hardcoded paths)
-- Include subprocess fallback instructions
+- Utiliser le frontmatter dans tous les fichiers `.md`
+- Inclure `MANDATORY EXECUTION RULES` dans chaque étape
+- Inclure `SYSTEM SUCCESS/FAILURE METRICS` dans chaque étape
+- Terminer chaque étape par un menu qui interrompt l'exécution
+- Suivre la progression dans le frontmatter `stepsCompleted`
+- Utiliser la syntaxe `{variable}` pour les valeurs de config (pas de chemins en dur)
+- Inclure des instructions de fallback pour les subprocess
 
-### Quality Checklist
+### Checklist Qualité
 
-Before submitting, verify:
+Avant de soumettre, vérifiez :
 
-- [ ] All step files follow the standard structure
-- [ ] Variables are used instead of hardcoded values
-- [ ] Every step has clear success/failure metrics
-- [ ] Menus halt execution and wait for user input
-- [ ] The workflow is resumable (step-01b handles continuation)
-- [ ] README is complete and clear
-- [ ] No project-specific content remains
+- [ ] Tous les fichiers d'étapes suivent la structure standard
+- [ ] Les variables sont utilisées au lieu de valeurs en dur
+- [ ] Chaque étape a des métriques de succès/échec claires
+- [ ] Les menus interrompent l'exécution et attendent l'entrée utilisateur
+- [ ] Le workflow est reprise possible (step-01b gère la continuation) — sauf si single-session
+- [ ] Le README est complet et clair
+- [ ] Aucun contenu spécifique à un projet ne subsiste
+- [ ] La ligne de manifeste CSV est fournie dans le README (prête à copier-coller)
+- [ ] Les templates de commande IDE sont fournis pour au moins Cursor et Claude Code
+- [ ] Le module cible et la config requise sont clairement indiqués
 
-## How to Submit
+## Comment Soumettre
 
-### 1. Fork This Repository
+### 1. Forkez ce Dépôt
 
-Fork this repo and create a branch for your workflow.
+Forkez ce dépôt et créez une branche pour votre workflow.
 
-### 2. Add Your Workflow
+### 2. Ajoutez Votre Workflow
 
-Place your workflow folder inside `workflows/`:
+Placez le dossier de votre workflow dans `workflows/` :
 
 ```
 workflows/
-├── dev-checkpoint/    # Existing
-└── your-workflow/     # New
+├── dev-checkpoint/    # Existant
+└── votre-workflow/    # Nouveau
 ```
 
-### 3. Update the Main README
+### 3. Mettez à Jour le README Principal
 
-Add your workflow to the table in the root `README.md`:
+Ajoutez votre workflow au tableau dans le `README.md` racine :
 
 ```markdown
-| [your-workflow](workflows/your-workflow/) | Description | Use when... |
+| [votre-workflow](workflows/votre-workflow/) | Module | Description | Quand l'utiliser... |
 ```
 
-### 4. Open a Pull Request
+### 4. Vérifiez les Instructions d'Intégration
 
-Include in your PR description:
+Assurez-vous que le README de votre workflow contient :
 
-- What problem the workflow solves
-- How you've tested it
-- Which BMAD module it targets
+- La **ligne de manifeste CSV exacte** pour `_bmad/_config/workflow-manifest.csv`
+- Les **templates de commande IDE pré-remplis** (au minimum Cursor et Claude Code)
+- Le **chemin de destination** pour la copie du workflow (ex. `_bmad/core/workflows/nom/`)
 
-## Style Guide
+Un utilisateur doit pouvoir intégrer votre workflow en suivant **uniquement** le README, sans consulter d'autre documentation.
 
-### Naming
+### 5. Ouvrez une Pull Request
 
-- Workflow folder: `kebab-case` (e.g., `dev-checkpoint`, `sprint-review`)
-- Step files: `step-XX-name.md` (e.g., `step-01-init.md`, `step-02-analysis.md`)
-- Output files: `descriptive-name.md` (e.g., `codebase-analysis.md`)
+Incluez dans la description de votre PR :
 
-### Language
+- Quel problème le workflow résout
+- Comment vous l'avez testé
+- Quel module BMAD il cible
 
-- Workflow instructions can be in any language
-- README should be in English (with additional languages welcome)
-- Use `{communication_language}` variable for runtime language switching
+## Guide de Style
 
-### Tone
+### Nommage
 
-- Step instructions: Direct, imperative ("Scan the project", "Present findings")
-- READMEs: Clear, friendly, no unnecessary jargon
-- Error metrics: Specific ("Not reading the complete file" not "Doing it wrong")
+- Dossier du workflow : `kebab-case` (ex. `dev-checkpoint`, `smart-commit`)
+- Fichiers d'étapes : `step-XX-nom.md` (ex. `step-01-init.md`, `step-02-analysis.md`)
+- Fichiers de sortie : `nom-descriptif.md` (ex. `codebase-analysis.md`)
 
-## Questions?
+### Langue
 
-Open an issue if you have questions about contributing or need help structuring your workflow.
+- Les instructions des workflows peuvent être dans n'importe quelle langue
+- Le README devrait être dans la langue du projet
+- Utiliser la variable `{communication_language}` pour le changement de langue à l'exécution
+
+### Ton
+
+- Instructions des étapes : Direct, impératif ("Scanner le projet", "Présenter les résultats")
+- READMEs : Clair, accessible, sans jargon inutile
+- Métriques d'erreur : Spécifiques ("Ne pas lire le fichier complet" et non "Mal faire")
+
+## Questions ?
+
+Ouvrez une issue si vous avez des questions sur la contribution ou si vous avez besoin d'aide pour structurer votre workflow.

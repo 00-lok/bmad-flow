@@ -1,145 +1,145 @@
-# Understanding BMAD Workflow Architecture
+# Comprendre l'Architecture des Workflows BMAD
 
-This document explains how BMAD workflows are structured so you can understand, modify, or create your own.
+Ce document explique comment les workflows BMAD sont structurés pour que vous puissiez les comprendre, les modifier ou créer les vôtres.
 
-## Core Concepts
+## Concepts Fondamentaux
 
-### Micro-File Architecture
+### Architecture Micro-Fichiers
 
-BMAD workflows use a **micro-file design** where each step is a self-contained instruction file. This means:
+Les workflows BMAD utilisent un **design micro-fichiers** où chaque étape est un fichier d'instruction autonome. Cela signifie :
 
-- The AI only loads **one step at a time** (just-in-time loading)
-- Each step file contains everything needed to execute that step
-- Steps execute in strict order — no skipping or reordering
-- Progress is tracked in output file frontmatter
+- L'IA ne charge qu'**une étape à la fois** (chargement juste-à-temps)
+- Chaque fichier d'étape contient tout le nécessaire pour exécuter cette étape
+- Les étapes s'exécutent dans un ordre strict — pas de saut ni de réordonnancement
+- La progression est suivie dans le frontmatter des fichiers de sortie
 
-### Why Micro-Files?
+### Pourquoi les Micro-Fichiers ?
 
-1. **Context efficiency** — AI models have limited context windows. Loading one step at a time keeps the context focused
-2. **Resumability** — If a session ends, the workflow can resume at the last completed step
-3. **Clarity** — Each step has a clear, bounded goal
-4. **Maintainability** — Steps can be updated independently
+1. **Efficacité du contexte** — Les modèles IA ont des fenêtres de contexte limitées. Charger une étape à la fois garde le contexte concentré
+2. **Reprise possible** — Si une session se termine, le workflow peut reprendre à la dernière étape complétée
+3. **Clarté** — Chaque étape a un objectif clair et délimité
+4. **Maintenabilité** — Les étapes peuvent être mises à jour indépendamment
 
-## File Structure
+## Structure des Fichiers
 
-Every BMAD workflow follows this structure:
+Chaque workflow BMAD suit cette structure :
 
 ```
-workflow-name/
-├── workflow.md              # Entry point — defines goal, role, and rules
-├── workflow-plan.md         # Design document (optional, for transparency)
-├── data/                    # Templates, schemas, reference data
+nom-du-workflow/
+├── workflow.md              # Point d'entrée — définit l'objectif, le rôle et les règles
+├── workflow-plan.md         # Document de conception (optionnel, pour la transparence)
+├── data/                    # Templates, schémas, données de référence
 │   └── template.md
-└── steps-c/                 # Step files (c = create mode)
-    ├── step-01-init.md      # Always starts with initialization
-    ├── step-01b-continue.md # Continuation handler (for resumable workflows)
-    ├── step-02-*.md         # Subsequent steps
+└── steps-c/                 # Fichiers d'étapes (c = mode création)
+    ├── step-01-init.md      # Commence toujours par l'initialisation
+    ├── step-01b-continue.md # Gestionnaire de continuation (pour les workflows reprenables)
+    ├── step-02-*.md         # Étapes suivantes
     ├── step-03-*.md
     └── ...
 ```
 
-### Folder Naming: `steps-c/`, `steps-u/`, `steps-d/`
+### Nommage des Dossiers : `steps-c/`, `steps-u/`, `steps-d/`
 
-BMAD supports three lifecycle modes:
+BMAD supporte trois modes de cycle de vie :
 
-| Folder | Mode | Description |
-|--------|------|-------------|
-| `steps-c/` | **Create** | Steps for creating something new |
-| `steps-u/` | **Update** | Steps for modifying existing work |
-| `steps-d/` | **Delete** | Steps for removing or archiving |
+| Dossier | Mode | Description |
+|---------|------|-------------|
+| `steps-c/` | **Création** | Étapes pour créer quelque chose de nouveau |
+| `steps-u/` | **Mise à jour** | Étapes pour modifier un travail existant |
+| `steps-d/` | **Suppression** | Étapes pour supprimer ou archiver |
 
-Most workflows only use `steps-c/`. Tri-modal workflows include all three.
+La plupart des workflows n'utilisent que `steps-c/`. Les workflows tri-modaux incluent les trois.
 
-## Anatomy of `workflow.md`
+## Anatomie de `workflow.md`
 
-The entry point file contains:
+Le fichier point d'entrée contient :
 
 ```markdown
 ---
-name: Workflow Name
-description: What this workflow does
+name: Nom du Workflow
+description: Ce que fait ce workflow
 web_bundle: true
 ---
 
-# Workflow Name
+# Nom du Workflow
 
-**Goal:** [Clear statement of what the workflow achieves]
+**Objectif :** [Énoncé clair de ce que le workflow accomplit]
 
-**Your Role:** [How the AI should behave during this workflow]
+**Votre Rôle :** [Comment l'IA doit se comporter pendant ce workflow]
 
-## WORKFLOW ARCHITECTURE
-[Core principles and rules]
+## ARCHITECTURE DU WORKFLOW
+[Principes fondamentaux et règles]
 
-## INITIALIZATION SEQUENCE
-[How to start — load config, execute first step]
+## SÉQUENCE D'INITIALISATION
+[Comment démarrer — charger la config, exécuter la première étape]
 ```
 
-### Key Sections
+### Sections Clés
 
-- **Goal** — What the workflow produces and why
-- **Your Role** — Persona and expertise the AI adopts
-- **Core Principles** — Rules the AI must follow (micro-file design, sequential enforcement, etc.)
-- **Critical Rules** — Non-negotiable constraints (never load multiple steps, always wait for user input at menus, etc.)
-- **Initialization Sequence** — Config loading and first step execution
+- **Objectif** — Ce que le workflow produit et pourquoi
+- **Votre Rôle** — Persona et expertise que l'IA adopte
+- **Principes Fondamentaux** — Règles que l'IA doit suivre (design micro-fichiers, exécution séquentielle, etc.)
+- **Règles Critiques** — Contraintes non négociables (ne jamais charger plusieurs étapes, toujours attendre l'entrée utilisateur aux menus, etc.)
+- **Séquence d'Initialisation** — Chargement de la config et exécution de la première étape
 
-## Anatomy of a Step File
+## Anatomie d'un Fichier d'Étape
 
-Each step file follows a consistent structure:
+Chaque fichier d'étape suit une structure cohérente :
 
 ```markdown
 ---
-name: 'step-XX-name'
-description: 'What this step does'
-nextStepFile: './step-XX+1-name.md'
+name: 'step-XX-nom'
+description: 'Ce que fait cette étape'
+nextStepFile: './step-XX+1-nom.md'
 checkpointFolder: '{checkpointFolder}'
 ---
 
-# Step X: Title
+# Étape X : Titre
 
-## STEP GOAL:
-[Clear statement of this step's objective]
+## OBJECTIF DE L'ÉTAPE :
+[Énoncé clair de l'objectif de cette étape]
 
-## MANDATORY EXECUTION RULES (READ FIRST):
-### Universal Rules:    [Rules that apply to all steps]
-### Role Reinforcement: [Persona reminders]
-### Step-Specific Rules: [Rules unique to this step]
+## RÈGLES D'EXÉCUTION OBLIGATOIRES (LIRE D'ABORD) :
+### Règles Universelles :    [Règles applicables à toutes les étapes]
+### Rappel du Rôle :         [Rappels de la persona]
+### Règles Spécifiques :     [Règles uniques à cette étape]
 
-## EXECUTION PROTOCOLS:
-[How to execute this step]
+## PROTOCOLES D'EXÉCUTION :
+[Comment exécuter cette étape]
 
-## CONTEXT BOUNDARIES:
-[What information is available and what's off-limits]
+## LIMITES DU CONTEXTE :
+[Quelles informations sont disponibles et lesquelles sont hors limites]
 
-## MANDATORY SEQUENCE
-[Numbered sequence of actions — follow exactly]
+## SÉQUENCE OBLIGATOIRE
+[Séquence numérotée d'actions — à suivre exactement]
 
-### 1. [First Action]
-### 2. [Second Action]
+### 1. [Première Action]
+### 2. [Deuxième Action]
 ...
 
-### N. Present MENU OPTIONS
-Display: **[C] Continue — [description]**
+### N. Présenter les OPTIONS DU MENU
+Afficher : **[C] Continuer — [description]**
 
-## SYSTEM SUCCESS/FAILURE METRICS
-### SUCCESS: [What constitutes success]
-### FAILURE: [What constitutes failure]
+## MÉTRIQUES DE SUCCÈS/ÉCHEC DU SYSTÈME
+### SUCCÈS : [Ce qui constitue un succès]
+### ÉCHEC : [Ce qui constitue un échec]
 ```
 
-### Key Elements
+### Éléments Clés
 
-| Element | Purpose |
+| Élément | Utilité |
 |---------|---------|
-| **Frontmatter** | Metadata: name, description, next step path, variables |
-| **Step Goal** | Single clear objective for this step |
-| **Execution Rules** | Constraints the AI must follow |
-| **Context Boundaries** | What data is available vs. off-limits |
-| **Mandatory Sequence** | Exact actions in order — the core of the step |
-| **Menu** | User control point — workflow halts here |
-| **Success/Failure Metrics** | How to evaluate if the step was done correctly |
+| **Frontmatter** | Métadonnées : nom, description, chemin de l'étape suivante, variables |
+| **Objectif de l'Étape** | Un seul objectif clair pour cette étape |
+| **Règles d'Exécution** | Contraintes que l'IA doit respecter |
+| **Limites du Contexte** | Quelles données sont disponibles vs. interdites |
+| **Séquence Obligatoire** | Actions exactes dans l'ordre — le cœur de l'étape |
+| **Menu** | Point de contrôle utilisateur — le workflow s'arrête ici |
+| **Métriques de Succès/Échec** | Comment évaluer si l'étape a été correctement exécutée |
 
-## State Management
+## Gestion de l'État
 
-Workflows track progress using **frontmatter in output files**:
+Les workflows suivent la progression via le **frontmatter dans les fichiers de sortie** :
 
 ```yaml
 ---
@@ -149,70 +149,70 @@ status: IN_PROGRESS
 ---
 ```
 
-- `stepsCompleted` — Array of completed step names
-- `lastStep` — Most recently completed step
-- `status` — `IN_PROGRESS` or `COMPLETE`
+- `stepsCompleted` — Tableau des noms d'étapes complétées
+- `lastStep` — Dernière étape complétée
+- `status` — `IN_PROGRESS` ou `COMPLETE`
 
-This enables **session resumption**: if the workflow is interrupted, `step-01b-continue.md` reads the frontmatter and routes to the next step.
+Cela permet la **reprise de session** : si le workflow est interrompu, `step-01b-continue.md` lit le frontmatter et route vers l'étape suivante.
 
-## Variable Resolution
+## Résolution des Variables
 
-Step files use variables that are resolved from the BMAD config:
+Les fichiers d'étapes utilisent des variables résolues depuis la config BMAD :
 
-| Variable | Source | Example |
+| Variable | Source | Exemple |
 |----------|--------|---------|
-| `{project-root}` | Auto-detected | `/home/user/my-project` |
-| `{project_name}` | `config.yaml` | `My App` |
+| `{project-root}` | Détection automatique | `/home/user/mon-projet` |
+| `{project_name}` | `config.yaml` | `Mon App` |
 | `{output_folder}` | `config.yaml` | `_bmad-output` |
-| `{user_name}` | `config.yaml` | `John` |
-| `{communication_language}` | `config.yaml` | `fr` |
-| `{checkpointFolder}` | Set during step-01 | `_bmad-output/dev-checkpoints/2026-02-28T14-30-00` |
+| `{user_name}` | `config.yaml` | `Doens` |
+| `{communication_language}` | `config.yaml` | `french` |
+| `{checkpointFolder}` | Défini pendant step-01 | `_bmad-output/dev-checkpoints/2026-02-28T14-30-00` |
 
-## Menu System
+## Système de Menus
 
-Every step ends with a menu that halts execution:
-
-```markdown
-### Present MENU OPTIONS
-
-Display: **[C] Continuer — Lancer l'analyse**
-
-#### Menu Handling Logic:
-- IF C: verify outputs, load and execute next step
-- IF Any other: help user, redisplay menu
-```
-
-The AI **must halt and wait for user input** at menus. This gives you control over pacing.
-
-Common menu options:
-
-| Option | Meaning |
-|--------|---------|
-| `[C]` | Continue to next step |
-| `[A]` | Advanced elicitation (deeper exploration) |
-| `[P]` | Party mode (creative brainstorming) |
-
-## Subprocess Optimization
-
-Some steps can leverage **sub-agents** for parallel processing:
+Chaque étape se termine par un menu qui interrompt l'exécution :
 
 ```markdown
-- Subprocess Pattern 2: One sub-agent per item (e.g., one per artifact)
-- Subprocess Pattern 4: Parallel comparisons by category
-- Fallback: Sequential processing in main thread
+### Présenter les OPTIONS DU MENU
+
+Afficher : **[C] Continuer — Lancer l'analyse**
+
+#### Logique de Gestion du Menu :
+- SI C : vérifier les sorties, charger et exécuter l'étape suivante
+- SI Autre : aider l'utilisateur, réafficher le menu
 ```
 
-If the AI doesn't have sub-agent capabilities, it falls back to sequential processing. The workflow handles this gracefully.
+L'IA **doit s'arrêter et attendre l'entrée utilisateur** aux menus. Cela vous donne le contrôle du rythme.
 
-## Creating Your Own Workflow
+Options de menu courantes :
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines on creating and submitting new workflows.
+| Option | Signification |
+|--------|---------------|
+| `[C]` | Continuer vers l'étape suivante |
+| `[A]` | Élicitation avancée (exploration plus poussée) |
+| `[P]` | Party mode (brainstorming créatif) |
 
-Key principles:
+## Optimisation des Subprocess
 
-1. **One goal per workflow** — Keep it focused
-2. **Micro-file steps** — One concern per step file
-3. **Clear boundaries** — Each step knows what it can and can't do
-4. **User control** — Menus at every transition point
-5. **State tracking** — Enable resumability
-6. **Graceful fallbacks** — Work with or without sub-agents
+Certaines étapes peuvent exploiter les **sub-agents** pour le traitement parallèle :
+
+```markdown
+- Pattern Subprocess 2 : Un sub-agent par élément (ex. un par artefact)
+- Pattern Subprocess 4 : Comparaisons parallèles par catégorie
+- Fallback : Traitement séquentiel dans le thread principal
+```
+
+Si l'IA n'a pas de capacités de sub-agents, elle revient au traitement séquentiel. Le workflow gère cela gracieusement.
+
+## Créer Votre Propre Workflow
+
+Voir [CONTRIBUTING.md](../CONTRIBUTING.md) pour les directives de création et de soumission de nouveaux workflows.
+
+Principes clés :
+
+1. **Un objectif par workflow** — Restez concentré
+2. **Étapes micro-fichiers** — Un concern par fichier d'étape
+3. **Limites claires** — Chaque étape sait ce qu'elle peut et ne peut pas faire
+4. **Contrôle utilisateur** — Menus à chaque point de transition
+5. **Suivi d'état** — Permettre la reprise
+6. **Fallbacks gracieux** — Fonctionner avec ou sans sub-agents

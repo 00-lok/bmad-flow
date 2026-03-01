@@ -1,98 +1,198 @@
-# Getting Started
+# Guide d'Intégration
 
-This guide walks you through installing and using a custom BMAD workflow in your project.
+Ce guide vous accompagne dans l'installation complète d'un workflow BMAD personnalisé dans votre projet — de la copie des fichiers jusqu'à la commande fonctionnelle dans votre IDE.
 
-## Prerequisites
+## Prérequis
 
-Before you begin, make sure you have:
+- **Un projet BMAD** — Votre projet doit avoir un dossier `_bmad/` avec la BMAD Method configurée (v6+)
+- **Un IDE IA** — Claude Code, Cursor, Windsurf, ou tout IDE supportant les agents BMAD
+- **Un `config.yaml`** — Votre module BMAD doit avoir un fichier de configuration avec les paramètres du projet
 
-- **A BMAD-enabled project** — Your project should have a `_bmad/` folder with the BMAD Method set up (v6+)
-- **An AI IDE** — Claude Code, Cursor, Windsurf, or any IDE that supports BMAD agents
-- **A `config.yaml`** — Your BMAD module should have a config file with project settings
+Si vous n'avez pas encore BMAD, visitez le [dépôt BMAD Method](https://github.com/bmadcode/BMAD-METHOD) pour commencer.
 
-If you don't have BMAD set up yet, visit the [BMAD Method repository](https://github.com/bmadcode/BMAD-METHOD) to get started.
+---
 
-## Installation
+## Installation en 4 étapes
 
-### Step 1: Choose a Workflow
+### Étape 1 : Copier le workflow
 
-Browse the [workflows/](../workflows/) folder and pick the workflow you want. Each workflow has its own README with details about what it does.
+Chaque workflow a un **module cible** (indiqué dans son README). Copiez le dossier complet dans le bon emplacement de votre projet :
 
-### Step 2: Identify the Target Module
-
-BMAD workflows belong to specific modules. Check the workflow's README to find which module it belongs to:
-
-| Module | Path | Description |
-|--------|------|-------------|
-| BMM | `_bmad/bmm/workflows/` | Software development (planning, building, shipping) |
-| Core | `_bmad/core/workflows/` | Cross-module utilities |
-| CIS | `_bmad/cis/workflows/` | Creative and innovation |
-| TEA | `_bmad/tea/workflows/` | Testing and quality |
-
-### Step 3: Copy the Workflow
-
-Copy the entire workflow folder into the correct location in your project:
+| Module | Chemin de destination | Description |
+|--------|----------------------|-------------|
+| Core | `_bmad/core/workflows/` | Utilitaires transversaux |
+| BMM | `_bmad/bmm/workflows/{phase}/` | Développement logiciel |
+| CIS | `_bmad/cis/workflows/` | Créativité et innovation |
+| TEA | `_bmad/tea/workflows/` | Tests et qualité |
 
 ```bash
-# Example: dev-checkpoint belongs to BMM, phase 4 (implementation)
-cp -r workflows/dev-checkpoint/ your-project/_bmad/bmm/workflows/4-implementation/dev-checkpoint/
+# Exemple : smart-commit (module Core)
+cp -r workflows/smart-commit/ votre-projet/_bmad/core/workflows/smart-commit/
+
+# Exemple : dev-checkpoint (module BMM, phase 4)
+cp -r workflows/dev-checkpoint/ votre-projet/_bmad/bmm/workflows/4-implementation/dev-checkpoint/
 ```
 
-> Keep the folder name as-is. BMAD uses folder names for workflow identification.
+> Gardez le nom du dossier tel quel. BMAD utilise les noms de dossiers pour l'identification des workflows.
 
-### Step 4: Register the Workflow (if needed)
+---
 
-Some BMAD setups auto-discover workflows. If yours doesn't, you may need to register it in your module's manifest or config file.
+### Étape 2 : Enregistrer dans le manifeste
 
-Check your `_bmad/bmm/manifest.yaml` (or equivalent) to see if workflows need explicit registration.
+Ajoutez une ligne au fichier `_bmad/_config/workflow-manifest.csv` de votre projet pour que BMAD reconnaisse le workflow.
 
-### Step 5: Launch
+**Format du manifeste :**
 
-Use your AI IDE's BMAD command system:
-
-```
-/bmad-bmm-dev-checkpoint
+```csv
+name,description,module,path
 ```
 
-Or simply ask your AI assistant in natural language:
+| Champ | Description | Exemple |
+|-------|-------------|---------|
+| `name` | Identifiant unique du workflow (kebab-case) | `"smart-commit"` |
+| `description` | Description + déclencheurs en langage naturel | `"Analyse les changements... Use when user says smart commit"` |
+| `module` | Module BMAD (`core`, `bmm`, `cis`, `tea`) | `"core"` |
+| `path` | Chemin relatif vers le `workflow.md` depuis la racine du projet | `"_bmad/core/workflows/smart-commit/workflow.md"` |
+
+**Comment faire :** Ouvrez `_bmad/_config/workflow-manifest.csv` et ajoutez une nouvelle ligne à la fin. Chaque workflow de ce dépôt fournit la ligne exacte à copier dans son README.
+
+---
+
+### Étape 3 : Créer la commande IDE
+
+Pour que la commande `/bmad-nom-du-workflow` apparaisse dans votre IDE, vous devez créer un fichier de commande dans le dossier approprié. Le format varie selon l'IDE.
+
+#### Cursor / Claude Code / Augment
+
+**Dossier :** `.cursor/commands/`, `.claude/commands/`, ou `.augment/commands/`
+**Fichier :** `bmad-nom-du-workflow.md`
+
+```markdown
+---
+name: 'nom-du-workflow'
+description: 'Description du workflow...'
+---
+
+IT IS CRITICAL THAT YOU FOLLOW THIS COMMAND: LOAD the FULL {project-root}/_bmad/MODULE/workflows/NOM/workflow.md, READ its entire contents and follow its directions exactly!
+```
+
+#### Clinerules
+
+**Dossier :** `.clinerules/workflows/`
+**Fichier :** `bmad-nom-du-workflow.md`
+
+```markdown
+---
+description: 'Description du workflow...'
+auto_execution_mode: "iterate"
+---
+
+# nom-du-workflow
+
+Read the entire workflow file at {project-root}/_bmad/MODULE/workflows/NOM/workflow.md
+
+Follow all instructions in the workflow file exactly as written.
+```
+
+#### Gemini
+
+**Dossier :** `.gemini/commands/`
+**Fichier :** `bmad-nom-du-workflow.toml`
+
+```toml
+description = "Description du workflow..."
+prompt = """
+Execute the BMAD 'nom-du-workflow' workflow.
+
+CRITICAL: You must load and follow the workflow definition exactly.
+
+WORKFLOW INSTRUCTIONS:
+1. LOAD the workflow file from {project-root}/_bmad/MODULE/workflows/NOM/workflow.md
+2. READ its entire contents
+3. FOLLOW every step precisely as specified
+4. DO NOT skip or modify any steps
+
+WORKFLOW FILE: {project-root}/_bmad/MODULE/workflows/NOM/workflow.md
+"""
+```
+
+#### GitHub Copilot
+
+**Dossier :** `.github/prompts/`
+**Fichier :** `bmad-nom-du-workflow.prompt.md`
+
+```markdown
+---
+description: 'Description courte du workflow'
+agent: 'agent'
+tools: ['read', 'edit', 'search', 'execute']
+---
+
+1. Load {project-root}/_bmad/core/config.yaml and store ALL fields as session variables
+2. Load and follow the workflow at {project-root}/_bmad/MODULE/workflows/NOM/workflow.md
+```
+
+> Chaque workflow de ce dépôt fournit les templates pré-remplis dans son README — il suffit de copier-coller.
+
+---
+
+### Étape 4 : Vérifier et lancer
+
+1. **Vérifiez** que le dossier du workflow est au bon emplacement dans `_bmad/`
+2. **Vérifiez** que la ligne a été ajoutée au manifeste CSV
+3. **Ouvrez un nouveau chat** dans votre IDE (les commandes ne sont pas rechargées en cours de session)
+4. **Tapez** `/bmad-nom-du-workflow` — la commande devrait apparaître
+
+Vous pouvez aussi lancer le workflow en langage naturel :
 
 ```
-"Run the dev checkpoint workflow"
-"Do a dev checkpoint"
-"Faire un point de dev"
+"Fais un smart commit"
+"Lance le dev checkpoint"
 ```
 
-## What to Expect
+---
 
-When a workflow runs:
+## À Quoi S'Attendre
 
-1. **Initialization** — The workflow loads, detects your project context, and asks a few questions
-2. **Autonomous phases** — The AI analyzes your code and/or artifacts (no input needed)
-3. **Collaborative phases** — The AI presents findings and asks for your decisions
-4. **Application** — Changes are applied based on your decisions
-5. **Summary** — A final report is generated
+Quand un workflow s'exécute :
 
-Progress is tracked, so if your session ends mid-workflow, you can resume where you left off.
+1. **Initialisation** — Le workflow se charge, détecte le contexte de votre projet et pose quelques questions
+2. **Phases autonomes** — L'IA analyse votre code et/ou vos artefacts (pas d'entrée nécessaire)
+3. **Phases collaboratives** — L'IA présente ses résultats et demande vos décisions
+4. **Application** — Les changements sont appliqués selon vos décisions
+5. **Résumé** — Un rapport final est généré
 
-## Troubleshooting
+La progression est suivie, donc si votre session se termine en cours de workflow, vous pouvez reprendre là où vous en étiez.
 
-### "Workflow not found"
+---
 
-- Verify the workflow folder is in the correct module directory
-- Check that your BMAD manifest includes the workflow
-- Ensure the folder name matches exactly
+## Dépannage
 
-### "Config variables not resolved"
+### La commande `/bmad-xxx` n'apparaît pas
 
-- Make sure your `_bmad/{module}/config.yaml` contains the required variables
-- Common variables: `project_name`, `output_folder`, `user_name`, `communication_language`
+- Vérifiez que le fichier de commande existe dans le bon dossier IDE (`.cursor/commands/`, `.claude/commands/`, etc.)
+- Vérifiez que le nom du fichier suit le pattern `bmad-nom-du-workflow.md`
+- **Ouvrez un nouveau chat** — les commandes ne sont pas rechargées dans un chat existant
 
-### Session ended mid-workflow
+### "Workflow not found" ou fichier introuvable
 
-- Re-launch the same workflow command
-- It will detect the in-progress checkpoint and offer to resume
+- Vérifiez que le dossier du workflow est dans le bon répertoire de module
+- Vérifiez que le chemin dans la commande IDE correspond au chemin réel du `workflow.md`
+- Vérifiez que le manifeste CSV contient le bon chemin
 
-## Next Steps
+### "Variables de configuration non résolues"
 
-- Read [workflow-anatomy.md](workflow-anatomy.md) to understand how workflows are structured
-- Explore specific workflow READMEs for detailed usage instructions
+- Assurez-vous que votre `_bmad/{module}/config.yaml` contient les variables requises
+- Variables courantes : `project_name`, `output_folder`, `user_name`, `communication_language`
+
+### Session terminée en cours de workflow
+
+- Relancez la même commande de workflow
+- Il détectera le checkpoint en cours et proposera de reprendre (si le workflow est continuable)
+
+---
+
+## Prochaines Étapes
+
+- Lisez [workflow-anatomy.md](workflow-anatomy.md) pour comprendre comment les workflows sont structurés
+- Explorez les READMEs spécifiques des workflows pour des instructions d'utilisation détaillées

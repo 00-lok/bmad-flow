@@ -12,8 +12,10 @@
 
 | Workflow | Module | Description | Quand l'utiliser |
 |----------|--------|-------------|------------------|
-| [dev-checkpoint](workflows/dev-checkpoint/) | BMM | État des lieux complet du développement : analyse le code et les artefacts BMAD, identifie les divergences, et réaligne la documentation avec la réalité du projet | Après une phase de dev significative, quand vos docs de planification ne reflètent plus le code réel |
-| [smart-commit](workflows/smart-commit/) | Core | Analyser et commiter intelligemment les changements | Vous avez des changements à commiter proprement |
+| [dev-checkpoint](workflows/incubation/dev-checkpoint/) | BMM | État des lieux complet du développement : analyse le code et les artefacts BMAD, identifie les divergences, et réaligne la documentation avec la réalité du projet | Après une phase de dev significative, quand vos docs de planification ne reflètent plus le code réel |
+| [smart-commit](workflows/incubation/smart-commit/) | Core | Analyser et commiter intelligemment les changements | Vous avez des changements à commiter proprement |
+
+Les deux workflows actuels sont en `workflows/incubation/` (statut expérimental / en cours de test).
 
 ## Intégration en 4 Étapes
 
@@ -36,25 +38,20 @@ Chaque workflow fournit dans son README les lignes exactes à copier-coller pour
 
 ## Structure du Dépôt
 
-```
+```text
 BMAD_Customs_Workflows/
-├── README.md                  # Vous êtes ici
-├── CONTRIBUTING.md            # Comment contribuer vos propres workflows
-├── LICENSE                    # Licence MIT
-├── docs/
-│   ├── getting-started.md     # Guide d'intégration complet (manifeste + commandes IDE)
-│   └── workflow-anatomy.md    # Comprendre l'architecture des workflows BMAD
-└── workflows/
-    ├── dev-checkpoint/        # État des lieux dev + réalignement artefacts BMAD
-    │   ├── README.md          # Documentation + instructions d'intégration
-    │   ├── workflow.md        # Point d'entrée du workflow
-    │   ├── workflow-plan.md   # Document de conception
-    │   ├── data/              # Templates et fichiers de données
-    │   └── steps-c/           # Fichiers d'étapes (exécutés séquentiellement)
-    └── smart-commit/          # Commits intelligents et atomiques
-        ├── README.md          # Documentation + instructions d'intégration
-        ├── workflow.md        # Point d'entrée du workflow
-        └── steps-c/           # Fichiers d'étapes
+|-- README.md
+|-- CONTRIBUTING.md
+|-- LICENSE
+|-- docs/
+|   |-- getting-started.md
+|   `-- workflow-anatomy.md
+`-- workflows/
+    |-- README.md               # Convention de classement (stable/incubation)
+    |-- stable/                 # Workflows validés (vide pour le moment)
+    `-- incubation/             # Workflows en cours de test et de création
+        |-- dev-checkpoint/
+        `-- smart-commit/
 ```
 
 ## Comment Fonctionnent les Workflows

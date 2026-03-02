@@ -27,13 +27,15 @@ Chaque workflow a un **module cible** (indiqué dans son README). Copiez le doss
 
 ```bash
 # Exemple : smart-commit (module Core)
-cp -r workflows/smart-commit/ votre-projet/_bmad/core/workflows/smart-commit/
+cp -r workflows/incubation/smart-commit/ votre-projet/_bmad/core/workflows/smart-commit/
 
 # Exemple : dev-checkpoint (module BMM, phase 4)
-cp -r workflows/dev-checkpoint/ votre-projet/_bmad/bmm/workflows/4-implementation/dev-checkpoint/
+cp -r workflows/incubation/dev-checkpoint/ votre-projet/_bmad/bmm/workflows/4-implementation/dev-checkpoint/
 ```
 
 > Gardez le nom du dossier tel quel. BMAD utilise les noms de dossiers pour l'identification des workflows.
+> Actuellement, les workflows disponibles dans ce dépôt sont en `workflows/incubation/` (expérimentaux).
+> Une fois validés, ils seront promus dans `workflows/stable/`.
 
 ---
 

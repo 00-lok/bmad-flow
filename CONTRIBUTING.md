@@ -69,6 +69,7 @@ Avant de soumettre, vérifiez :
 - [ ] La ligne de manifeste CSV est fournie dans le README (prête à copier-coller)
 - [ ] Les templates de commande IDE sont fournis pour au moins Cursor et Claude Code
 - [ ] Le module cible et la config requise sont clairement indiqués
+- [ ] Le workflow est ajouté dans `workflows/incubation/` (puis promu vers `workflows/stable/` une fois validé)
 
 ## Comment Soumettre
 
@@ -78,20 +79,25 @@ Forkez ce dépôt et créez une branche pour votre workflow.
 
 ### 2. Ajoutez Votre Workflow
 
-Placez le dossier de votre workflow dans `workflows/` :
+Placez le dossier de votre workflow dans `workflows/incubation/` :
 
 ```
 workflows/
-├── dev-checkpoint/    # Existant
-└── votre-workflow/    # Nouveau
+├── stable/                # Workflows validés (vide tant qu'aucun workflow n'est promu)
+└── incubation/            # Workflows en test/création
+    ├── dev-checkpoint/
+    ├── smart-commit/
+    └── votre-workflow/    # Nouveau workflow
 ```
+
+Une fois validé (tests + qualité + documentation), déplacez-le vers `workflows/stable/`.
 
 ### 3. Mettez à Jour le README Principal
 
 Ajoutez votre workflow au tableau dans le `README.md` racine :
 
 ```markdown
-| [votre-workflow](workflows/votre-workflow/) | Module | Description | Quand l'utiliser... |
+| [votre-workflow](workflows/incubation/votre-workflow/) | Module | Description | Quand l'utiliser... |
 ```
 
 ### 4. Vérifiez les Instructions d'Intégration

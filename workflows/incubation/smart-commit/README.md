@@ -40,7 +40,7 @@ Le workflow s'exécute en 5 étapes :
 ### 1. Copier le workflow
 
 ```bash
-cp -r workflows/smart-commit/ votre-projet/_bmad/core/workflows/smart-commit/
+cp -r workflows/incubation/smart-commit/ votre-projet/_bmad/core/workflows/smart-commit/
 ```
 
 ### 2. Ajouter au manifeste

@@ -50,7 +50,7 @@ En plus : **vos artefacts BMAD sont mis à jour sur place** pour refléter la r�
 ### 1. Copier le workflow
 
 ```bash
-cp -r workflows/dev-checkpoint/ votre-projet/_bmad/bmm/workflows/4-implementation/dev-checkpoint/
+cp -r workflows/incubation/dev-checkpoint/ votre-projet/_bmad/bmm/workflows/4-implementation/dev-checkpoint/
 ```
 
 ### 2. Ajouter au manifeste
